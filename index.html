@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتبة مصر القديمة - خدمات شاملة بأسعار القديمة</title>
+    <meta name="description" content="مكتبة مصر القديمة تقدم خدمات الطباعة والتصوير والتصميم والتغليف والخدمات الإلكترونية بأفضل الأسعار أمام المحكمة الجديدة">
+    <meta name="keywords" content="مكتبة, طباعة, تصوير, تصميم, فودافون كاش, مصر القديمة, المحكمة الجديدة">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="مكتبة مصر القديمة - خدمات شاملة بأسعار القديمة">
+    <meta property="og:description" content="كل ما تحتاجه من خدمات طباعة وتصوير وتصميم بأفضل الأسعار">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ar_EG">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>مك</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'egyptian-yellow': '#fbbf24',
+                        'egyptian-red': '#b91c1c',
+                        'egyptian-dark': '#7f1d1d',
+                        'egyptian-brown': '#8b4513',
+                        'papyrus': '#f5f1e8'
+                    },
+                    fontFamily: {
+                        'arabic': ['Amiri', 'serif'],
+                        'modern': ['Cairo', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-slow': 'pulse 2s infinite',
+                        'float': 'float 3s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(50px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Amiri', sans-serif;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23b91c1c' fill-opacity='0.05'%3E%3Cpath d='M30 30c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm20 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .egyptian-card {
+            background: white;
+            border: 3px solid white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .egyptian-card::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
+            border: 2px solid #b91c1c;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .egyptian-card::after {
+            content: '';
+            position: absolute;
+            top: 7px;
+            left: 7px;
+            right: 7px;
+            bottom: 7px;
+            border: 1px solid #fbbf24;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .egyptian-card .content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+        }
+        
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .transition-all {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #fbbf24;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::before {
+            width: 100%;
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #fbbf24, #b91c1c);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .mobile-menu.active {
+                transform: translateX(0);
+            }
+        }
+        
+        .pricing-card {
+            background: linear-gradient(145deg, #ffffff, #f3f4f6);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+        }
+        
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(145deg, #fbbf24, #b91c1c);
+            border-radius: inherit;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            -webkit-mask-composite: xor;
+        }
+        
+        .feature-icon {
+            background: linear-gradient(145deg, #fbbf24, #f59e0b);
+            color: #7f1d1d;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #b91c1c;
+            box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #b91c1c;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background: #10b981;
+        }
+        
+        .notification.error {
+            background: #ef4444;
+        }
+    </style>
+</head>
+<body class="font-modern text-egyptian-dark">
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+    
+    <!-- Header -->
+    <header class="bg-egyptian-dark text-white sticky top-0 z-50 shadow-2xl">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-egyptian-yellow rounded-full flex items-center justify-center border-2 border-white shadow-lg animate-float">
+                        <span class="text-egyptian-red font-bold text-xl">مك</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold font-arabic">مكتبة مصر القديمة</h1>
+                        <p class="text-xs text-egyptian-yellow">بأسعارها القديمة</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex gap-8">
+                    <a href="#home" class="nav-link py-2 px-1 hover:text-egyptian-yellow transition-colors">الرئيسية</a>
+                    <a href="#services" class="nav-link py-2 px-1 hover:text-egyptian-yellow transition-colors">الخدمات</a>
+                    <a href="#gallery" class="nav-link py-2 px-1 hover:text-egyptian-yellow transition-colors">المعرض</a>
+                    <a href="#about" class="nav-link py-2 px-1 hover:text-egyptian-yellow transition-colors">من نحن</a>
+                    <a href="#contact" class="nav-link py-2 px-1 hover:text-egyptian-yellow transition-colors">اتصل بنا</a>
+                </nav>
+                
+                <!-- Language Toggle & Mobile Menu -->
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleLanguage()" class="glass-effect px-3 py-1 rounded text-sm hover:bg-egyptian-yellow hover:text-egyptian-dark transition-all">
+                        EN
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="md:hidden focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="mobile-menu md:hidden fixed top-0 right-0 h-full w-64 bg-egyptian-dark shadow-2xl p-6">
+                <button onclick="toggleMobileMenu()" class="absolute top-4 left-4 text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <nav class="mt-12 space-y-4">
+                    <a href="#home" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded hover:bg-egyptian-red transition-colors">الرئيسية</a>
+                    <a href="#services" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded hover:bg-egyptian-red transition-colors">الخدمات</a>
+                    <a href="#gallery" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded hover:bg-egyptian-red transition-colors">المعرض</a>
+                    <a href="#about" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded hover:bg-egyptian-red transition-colors">من نحن</a>
+                    <a href="#contact" onclick="toggleMobileMenu()" class="block py-3 px-4 rounded hover:bg-egyptian-red transition-colors">اتصل بنا</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-10"></div>
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="animate-fade-in">
+                <!-- Logo Animation -->
+                <div class="mb-8 animate-bounce-slow">
+                    <div class="w-32 h-32 bg-egyptian-red rounded-full flex items-center justify-center mx-auto border-4 border-white shadow-2xl">
+                        <span class="text-white font-bold text-5xl font-arabic">مك</span>
+                    </div>
+                    <div class="mt-4 bg-egyptian-yellow px-6 py-2 rounded-full inline-block border-2 border-egyptian-red">
+                        <span class="text-egyptian-red font-bold">مصر القديمة</span>
+                    </div>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-bold text-white text-shadow mb-6 font-arabic">
+                    مكتبة مصر القديمة
+                </h1>
+                <h2 class="text-2xl md:text-4xl font-semibold text-egyptian-red bg-white px-8 py-3 rounded-xl inline-block mb-8 shadow-xl">
+                    بأسعارها القديمة
+                </h2>
+                <p class="text-xl md:text-2xl text-egyptian-dark max-w-4xl mx-auto mb-10 leading-relaxed">
+                    كل ما تحتاجه من خدمات طباعة، تصوير، تصميم، تغليف، مراجعات دراسية، خدمات إلكترونية وأكثر بأفضل الأسعار وأعلى جودة
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="#services" class="bg-egyptian-red hover:bg-egyptian-dark text-white px-8 py-4 rounded-xl font-bold text-lg transition-all hover-lift shadow-xl">
+                        استكشف خدماتنا
+                    </a>
+                    <a href="#contact" class="bg-white text-egyptian-red hover:bg-gray-100 px-8 py-4 rounded-xl font-bold text-lg transition-all hover-lift shadow-xl border-2 border-egyptian-red">
+                        اتصل بنا الآن
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 text-6xl animate-float opacity-20">📚</div>
+        <div class="absolute bottom-20 right-10 text-5xl animate-bounce-slow opacity-20">🎨</div>
+        <div class="absolute top-1/2 left-5 text-4xl animate-pulse-slow opacity-20">📱</div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-egyptian-dark mb-6">خدماتنا المتميزة</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">نقدم مجموعة شاملة من الخدمات عالية الجودة لتلبية جميع احتياجاتكم</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Cards -->
+                <div class="egyptian-card rounded-xl hover-lift transition-all p-8">
+                    <div class="content text-center">
+                        <div class="feature-icon mx-auto mb-6">📝</div>
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4">كتابة وطباعة</h3>
+                        <p class="text-gray-600 mb-6">خدمات الكتابة والطباعة للملازم والمراجعات والأبحاث بجودة عالية ودقة متناهية</p>
+                        <ul class="text-right space-y-2 text-sm text-gray-700">
+                            <li>• طباعة ملونة وأبيض وأسود</li>
+                            <li>• أحجام مختلفة A4, A3, A5</li>
+                            <li>• تجليد احترافي</li>
+                            <li>• كتابة المستندات والسيرة الذاتية</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="egyptian-card rounded-xl hover-lift transition-all p-8">
+                    <div class="content text-center">
+                        <div class="feature-icon mx-auto mb-6">📷</div>
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4">تصوير وتغليف</h3>
+                        <p class="text-gray-600 mb-6">خدمات التصوير عالية الجودة والتغليف الاحترافي للمستندات والكتب</p>
+                        <ul class="text-right space-y-2 text-sm text-gray-700">
+                            <li>• تصوير مستندات وكتب</li>
+                            <li>• مسح ضوئي عالي الجودة</li>
+                            <li>• تغليف حراري وورقي</li>
+                            <li>• تحويل إلى PDF</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="egyptian-card rounded-xl hover-lift transition-all p-8">
+                    <div class="content text-center">
+                        <div class="feature-icon mx-auto mb-6">🎨</div>
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4">تصميم ودعاية</h3>
+                        <p class="text-gray-600 mb-6">تصميم إبداعي للإعلانات والمواد الدعائية ومشاريع التخرج</p>
+                        <ul class="text-right space-y-2 text-sm text-gray-700">
+                            <li>• كروت شخصية وعمل</li>
+                            <li>• بوسترات ولافتات</li>
+                            <li>• دعوات ومناسبات</li>
+                            <li>• تصميم مشاريع التخرج</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="egyptian-card rounded-xl hover-lift transition-all p-8">
+                    <div class="content text-center">
+                        <div class="feature-icon mx-auto mb-6">💳</div>
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4">خدمات الدفع الإلكتروني</h3>
+                        <p class="text-gray-600 mb-6">جميع خدمات الدفع الإلكتروني والمحافظ الرقمية</p>
+                        <ul class="text-right space-y-2 text-sm text-gray-700">
+                            <li>• فودافون كاش</li>
+                            <li>• أمان للدفع</li>
+                            <li>• كاش باي</li>
+                            <li>• شحن إلكتروني</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="egyptian-card rounded-xl hover-lift transition-all p-8">
+                    <div class="content text-center">
+                        <div class="feature-icon mx-auto mb-6">🧶</div>
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4">منتجات هاند ميد</h3>
+                        <p class="text-gray-600 mb-6">منتجات يدوية مميزة وهدايا مخصصة بأسعار رائعة</p>
+                        <ul class="text-right space-y-2 text-sm text-gray-700">
+                            <li>• أعمال يدوية مميزة</li>
+                            <li>• هدايا مخصصة</li>
+                            <li>• إكسسوارات فريدة</li>
+                            <li>• تصميمات حسب الطلب</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="egyptian-card rounded-xl hover-lift transition-all p-8">
+                    <div class="content text-center">
+                        <div class="feature-icon mx-auto mb-6">📱</div>
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4">خدمات إضافية</h3>
+                        <p class="text-gray-600 mb-6">مجموعة متنوعة من الخدمات الإضافية لراحتكم</p>
+                        <ul class="text-right space-y-2 text-sm text-gray-700">
+                            <li>• خدمات حكومية</li>
+                            <li>• دفع فواتير</li>
+                            <li>• استخراج شهادات</li>
+                            <li>• خدمات إنترنت</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pricing Section -->
+            <div class="mt-20">
+                <h3 class="text-3xl font-bold text-center text-egyptian-dark mb-12">أسعارنا المميزة</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <div class="pricing-card rounded-xl p-8 text-center">
+                        <h4 class="text-xl font-bold text-egyptian-dark mb-4">الطباعة</h4>
+                        <div class="text-3xl font-bold text-egyptian-red mb-2">0.25</div>
+                        <p class="text-gray-600">جنيه للصفحة</p>
+                    </div>
+                    <div class="pricing-card rounded-xl p-8 text-center">
+                        <h4 class="text-xl font-bold text-egyptian-dark mb-4">التصوير</h4>
+                        <div class="text-3xl font-bold text-egyptian-red mb-2">0.20</div>
+                        <p class="text-gray-600">جنيه للصفحة</p>
+                    </div>
+                    <div class="pricing-card rounded-xl p-8 text-center">
+                        <h4 class="text-xl font-bold text-egyptian-dark mb-4">التجليد</h4>
+                        <div class="text-3xl font-bold text-egyptian-red mb-2">3.00</div>
+                        <p class="text-gray-600">جنيه للكتاب</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-papyrus">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-egyptian-dark mb-6">معرض أعمالنا</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">شاهد نماذج من أعمالنا المتميزة وإنجازاتنا</p>
+            </div>
+            
+            <!-- Gallery Filter -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button onclick="filterGallery('all')" class="filter-btn bg-egyptian-red text-white px-6 py-2 rounded-full font-semibold transition-all hover:bg-egyptian-dark">
+                    الكل
+                </button>
+                <button onclick="filterGallery('printing')" class="filter-btn bg-white text-egyptian-dark px-6 py-2 rounded-full font-semibold transition-all hover:bg-egyptian-yellow border border-egyptian-red">
+                    طباعة
+                </button>
+                <button onclick="filterGallery('design')" class="filter-btn bg-white text-egyptian-dark px-6 py-2 rounded-full font-semibold transition-all hover:bg-egyptian-yellow border border-egyptian-red">
+                    تصميم
+                </button>
+                <button onclick="filterGallery('handmade')" class="filter-btn bg-white text-egyptian-dark px-6 py-2 rounded-full font-semibold transition-all hover:bg-egyptian-yellow border border-egyptian-red">
+                    هاند ميد
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="galleryGrid">
+                <!-- Gallery Items with Placeholder SVGs -->
+                <div class="gallery-item printing rounded-xl overflow-hidden shadow-lg hover-lift transition-all cursor-pointer" onclick="openLightbox(0)">
+                    <div class="w-full h-64 bg-gradient-to-br from-egyptian-yellow to-yellow-400 flex items-center justify-center">
+                        <div class="text-center text-egyptian-dark">
+                            <div class="text-4xl mb-2">📄</div>
+                            <p class="font-bold">طباعة الملازم</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <h3 class="font-bold text-egyptian-dark">طباعة عالية الجودة</h3>
+                        <p class="text-gray-600 text-sm">ملازم دراسية</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item design rounded-xl overflow-hidden shadow-lg hover-lift transition-all cursor-pointer" onclick="openLightbox(1)">
+                    <div class="w-full h-64 bg-gradient-to-br from-egyptian-red to-red-600 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🎨</div>
+                            <p class="font-bold">تصميم إبداعي</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <h3 class="font-bold text-egyptian-dark">تصميم البروشورات</h3>
+                        <p class="text-gray-600 text-sm">مواد دعائية</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item handmade rounded-xl overflow-hidden shadow-lg hover-lift transition-all cursor-pointer" onclick="openLightbox(2)">
+                    <div class="w-full h-64 bg-gradient-to-br from-egyptian-brown to-amber-700 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">🧶</div>
+                            <p class="font-bold">منتجات يدوية</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <h3 class="font-bold text-egyptian-dark">أعمال هاند ميد</h3>
+                        <p class="text-gray-600 text-sm">قطع فنية</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item printing rounded-xl overflow-hidden shadow-lg hover-lift transition-all cursor-pointer" onclick="openLightbox(3)">
+                    <div class="w-full h-64 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">💼</div>
+                            <p class="font-bold">كروت العمل</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <h3 class="font-bold text-egyptian-dark">كروت شخصية</h3>
+                        <p class="text-gray-600 text-sm">تصميم احترافي</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item design rounded-xl overflow-hidden shadow-lg hover-lift transition-all cursor-pointer" onclick="openLightbox(4)">
+                    <div class="w-full h-64 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">📋</div>
+                            <p class="font-bold">مشاريع التخرج</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <h3 class="font-bold text-egyptian-dark">تصميم المشاريع</h3>
+                        <p class="text-gray-600 text-sm">أبحاث علمية</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item printing rounded-xl overflow-hidden shadow-lg hover-lift transition-all cursor-pointer" onclick="openLightbox(5)">
+                    <div class="w-full h-64 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-4xl mb-2">📚</div>
+                            <p class="font-bold">تجليد الكتب</p>
+                        </div>
+                    </div>
+                    <div class="p-4 bg-white">
+                        <h3 class="font-bold text-egyptian-dark">تجليد احترافي</h3>
+                        <p class="text-gray-600 text-sm">كتب ومذكرات</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-egyptian-dark mb-6">من نحن</h2>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                    مكتبة مصر القديمة ليست مجرد مكتبة عادية، بل هي شريكك الأمثل في رحلة التعلم والإبداع. نحن نفخر بتقديم خدمات متميزة وشاملة تلبي جميع احتياجاتكم التعليمية والمهنية بأفضل الأسعار وأعلى مستويات الجودة.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Mission -->
+                <div class="egyptian-card rounded-xl p-8">
+                    <div class="content">
+                        <div class="flex items-center mb-6">
+                            <div class="feature-icon ml-4">🎯</div>
+                            <h3 class="text-2xl font-bold text-egyptian-dark">رسالتنا</h3>
+                        </div>
+                        <p class="text-gray-600 text-lg leading-relaxed">
+                            نسعى لتقديم أفضل الخدمات التعليمية والطباعة بجودة عالية وأسعار مناسبة، مع الحفاظ على التراث المصري العريق والتطوير المستمر لخدماتنا.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Vision -->
+                <div class="egyptian-card rounded-xl p-8">
+                    <div class="content">
+                        <div class="flex items-center mb-6">
+                            <div class="feature-icon ml-4">👁️</div>
+                            <h3 class="text-2xl font-bold text-egyptian-dark">رؤيتنا</h3>
+                        </div>
+                        <p class="text-gray-600 text-lg leading-relaxed">
+                            أن نكون المكتبة الرائدة في تقديم الخدمات التعليمية والطباعة في المنطقة، ونكون الخيار الأول للطلاب والمهنيين.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Statistics -->
+            <div class="mt-20 bg-egyptian-red rounded-2xl p-12 text-white">
+                <h3 class="text-3xl font-bold text-center mb-12">إنجازاتنا بالأرقام</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="animate-fade-in">
+                        <div class="text-4xl md:text-5xl font-bold mb-2 text-egyptian-yellow">15+</div>
+                        <p class="text-lg">سنة من الخبرة</p>
+                    </div>
+                    <div class="animate-fade-in">
+                        <div class="text-4xl md:text-5xl font-bold mb-2 text-egyptian-yellow">10,000+</div>
+                        <p class="text-lg">عميل راضي</p>
+                    </div>
+                    <div class="animate-fade-in">
+                        <div class="text-4xl md:text-5xl font-bold mb-2 text-egyptian-yellow">50,000+</div>
+                        <p class="text-lg">مشروع منجز</p>
+                    </div>
+                    <div class="animate-fade-in">
+                        <div class="text-4xl md:text-5xl font-bold mb-2 text-egyptian-yellow">24/7</div>
+                        <p class="text-lg">خدمة متاحة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-papyrus">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-egyptian-dark mb-6">تواصل معنا</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">نحن هنا لخدمتكم وننتظر تواصلكم في أي وقت</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div class="egyptian-card rounded-xl p-8">
+                    <div class="content">
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-8">معلومات التواصل</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <div class="feature-icon">📍</div>
+                                <div>
+                                    <h4 class="font-bold text-egyptian-dark">العنوان</h4>
+                                    <p class="text-gray-600">أمام المحكمة الجديدة</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-4">
+                                <div class="feature-icon">📞</div>
+                                <div>
+                                    <h4 class="font-bold text-egyptian-dark">رقم التواصل</h4>
+                                    <p class="text-gray-600 text-xl font-bold">01075939877</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-4">
+                                <div class="feature-icon">🕒</div>
+                                <div>
+                                    <h4 class="font-bold text-egyptian-dark">ساعات العمل</h4>
+                                    <p class="text-gray-600">يومياً من 9 صباحاً إلى 10 مساءً</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-4">
+                                <div class="feature-icon">💬</div>
+                                <div>
+                                    <h4 class="font-bold text-egyptian-dark">واتساب</h4>
+                                    <p class="text-gray-600">01075939877</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Payment Methods -->
+                        <div class="mt-8">
+                            <h4 class="font-bold text-egyptian-dark mb-4">وسائل الدفع المتاحة</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-egyptian-yellow p-4 rounded-lg text-center border-2 border-egyptian-red">
+                                    <p class="font-bold text-egyptian-dark">فودافون كاش</p>
+                                </div>
+                                <div class="bg-egyptian-yellow p-4 rounded-lg text-center border-2 border-egyptian-red">
+                                    <p class="font-bold text-egyptian-dark">أمان</p>
+                                </div>
+                                <div class="bg-egyptian-yellow p-4 rounded-lg text-center border-2 border-egyptian-red">
+                                    <p class="font-bold text-egyptian-dark">كاش</p>
+                                </div>
+                                <div class="bg-egyptian-yellow p-4 rounded-lg text-center border-2 border-egyptian-red">
+                                    <p class="font-bold text-egyptian-dark">كاش باي</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="egyptian-card rounded-xl p-8">
+                    <div class="content">
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-8">أرسل لنا رسالة</h3>
+                        
+                        <form class="contact-form space-y-6" onsubmit="submitContactForm(event)">
+                            <div>
+                                <label class="block text-egyptian-dark font-semibold mb-2">الاسم *</label>
+                                <input type="text" name="name" required class="w-full p-4 border-2 border-gray-300 rounded-lg transition-all focus:border-egyptian-red" placeholder="أدخل اسمك الكامل">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-egyptian-dark font-semibold mb-2">رقم الهاتف *</label>
+                                <input type="tel" name="phone" required class="w-full p-4 border-2 border-gray-300 rounded-lg transition-all focus:border-egyptian-red" placeholder="أدخل رقم هاتفك">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-egyptian-dark font-semibold mb-2">البريد الإلكتروني</label>
+                                <input type="email" name="email" class="w-full p-4 border-2 border-gray-300 rounded-lg transition-all focus:border-egyptian-red" placeholder="أدخل بريدك الإلكتروني">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-egyptian-dark font-semibold mb-2">نوع الخدمة</label>
+                                <select name="service" class="w-full p-4 border-2 border-gray-300 rounded-lg transition-all focus:border-egyptian-red">
+                                    <option value="">اختر نوع الخدمة</option>
+                                    <option value="printing">طباعة</option>
+                                    <option value="copying">تصوير</option>
+                                    <option value="design">تصميم</option>
+                                    <option value="handmade">هاند ميد</option>
+                                    <option value="payment">خدمات دفع</option>
+                                    <option value="other">أخرى</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-egyptian-dark font-semibold mb-2">الرسالة *</label>
+                                <textarea name="message" required rows="5" class="w-full p-4 border-2 border-gray-300 rounded-lg transition-all focus:border-egyptian-red resize-none" placeholder="اكتب رسالتك هنا..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-egyptian-red hover:bg-egyptian-dark text-white px-6 py-4 rounded-lg font-bold text-lg transition-all hover-lift shadow-lg">
+                                <span class="btn-text">إرسال الرسالة</span>
+                                <div class="loading-spinner hidden mx-auto"></div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Map Section -->
+            <div class="mt-16 egyptian-card rounded-xl p-8">
+                <div class="content text-center">
+                    <h3 class="text-2xl font-bold text-egyptian-dark mb-6">موقعنا على الخريطة</h3>
+                    <div class="w-full h-80 bg-egyptian-yellow rounded-lg flex items-center justify-center border-4 border-egyptian-red">
+                        <div class="text-center text-egyptian-dark">
+                            <div class="text-6xl mb-4">📍</div>
+                            <h4 class="text-2xl font-bold mb-2">مكتبة مصر القديمة</h4>
+                            <p class="text-lg">أمام المحكمة الجديدة</p>
+                            <button onclick="openGoogleMaps()" class="mt-4 bg-egyptian-red text-white px-6 py-2 rounded-lg hover:bg-egyptian-dark transition-all">
+                                عرض على خرائط جوجل
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-egyptian-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 bg-egyptian-yellow rounded-full flex items-center justify-center border-2 border-white shadow-lg">
+                            <span class="text-egyptian-red font-bold text-2xl">مك</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold font-arabic">مكتبة مصر القديمة</h3>
+                            <p class="text-egyptian-yellow text-sm">بأسعارها القديمة</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed">
+                        شريكك الأمثل في رحلة التعلم والإبداع. نقدم خدمات متميزة بأفضل الأسعار وأعلى مستويات الجودة.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-egyptian-yellow">روابط سريعة</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-300 hover:text-egyptian-yellow transition-colors">الرئيسية</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-egyptian-yellow transition-colors">الخدمات</a></li>
+                        <li><a href="#gallery" class="text-gray-300 hover:text-egyptian-yellow transition-colors">المعرض</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-egyptian-yellow transition-colors">من نحن</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-egyptian-yellow transition-colors">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Social Media -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-egyptian-yellow">تابعنا على</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="social-icon w-12 h-12 bg-egyptian-yellow rounded-full flex items-center justify-center text-egyptian-red text-xl hover:bg-white">
+                            📘
+                        </a>
+                        <a href="#" class="social-icon w-12 h-12 bg-egyptian-yellow rounded-full flex items-center justify-center text-egyptian-red text-xl hover:bg-white">
+                            📷
+                        </a>
+                        <a href="#" class="social-icon w-12 h-12 bg-egyptian-yellow rounded-full flex items-center justify-center text-egyptian-red text-xl hover:bg-white">
+                            🐦
+                        </a>
+                        <a href="#" class="social-icon w-12 h-12 bg-egyptian-yellow rounded-full flex items-center justify-center text-egyptian-red text-xl hover:bg-white">
+                            💬
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-600 pt-8 text-center">
+                <p class="text-gray-300">
+                    &copy; 2024 مكتبة مصر القديمة. جميع الحقوق محفوظة. 
+                    <span class="text-egyptian-yellow">صنع بحب في مصر</span> ❤️
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
+        <div class="relative max-w-4xl max-h-full">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white hover:text-egyptian-yellow text-3xl z-10">
+                ✕
+            </button>
+            <div id="lightboxContent" class="bg-white rounded-lg overflow-hidden">
+                <!-- Content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 left-8 w-12 h-12 bg-egyptian-red text-white rounded-full shadow-lg hover:bg-egyptian-dark transition-all opacity-0 pointer-events-none z-40">
+        ↑
+    </button>
+
+    <script>
+        // Scroll Progress Indicator
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-fade-in, .egyptian-card, .gallery-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Gallery Filter
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // Update button styles
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-egyptian-red', 'text-white');
+                btn.classList.add('bg-white', 'text-egyptian-dark');
+            });
+            event.target.classList.remove('bg-white', 'text-egyptian-dark');
+            event.target.classList.add('bg-egyptian-red', 'text-white');
+            
+            // Filter items
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                    item.style.animation = 'fadeIn 0.5s ease-in-out';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Lightbox
+        const galleryData = [
+            { title: 'طباعة الملازم', description: 'خدمات طباعة عالية الجودة للطلاب', type: 'طباعة' },
+            { title: 'تصميم البروشورات', description: 'تصميمات إبداعية للمواد الدعائية', type: 'تصميم' },
+            { title: 'منتجات هاند ميد', description: 'أعمال يدوية مميزة وفريدة', type: 'هاند ميد' },
+            { title: 'كروت العمل', description: 'تصميم وطباعة كروت شخصية احترافية', type: 'طباعة' },
+            { title: 'مشاريع التخرج', description: 'تصميم وإخراج مشاريع التخرج والأبحاث', type: 'تصميم' },
+            { title: 'تجليد الكتب', description: 'خدمات تجليد احترافية للكتب والمذكرات', type: 'طباعة' }
+        ];
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const content = document.getElementById('lightboxContent');
+            const item = galleryData[index];
+            
+            content.innerHTML = `
+                <div class="p-8 text-center">
+                    <div class="w-full h-64 bg-gradient-to-br from-egyptian-yellow to-egyptian-red flex items-center justify-center mb-6 rounded-lg">
+                        <div class="text-white">
+                            <div class="text-6xl mb-4">${index % 2 === 0 ? '📄' : '🎨'}</div>
+                            <h3 class="text-2xl font-bold">${item.title}</h3>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold text-egyptian-dark mb-4">${item.title}</h3>
+                    <p class="text-gray-600 mb-4">${item.description}</p>
+                    <span class="inline-block bg-egyptian-yellow text-egyptian-dark px-4 py-2 rounded-full font-semibold">${item.type}</span>
+                </div>
+            `;
+            
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Contact Form Submission
+        function submitContactForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const btnText = form.querySelector('.btn-text');
+            const spinner = form.querySelector('.loading-spinner');
+            
+            // Show loading
+            btnText.classList.add('hidden');
+            spinner.classList.remove('hidden');
+            
+            // Simulate form submission
+            setTimeout(() => {
+                btnText.classList.remove('hidden');
+                spinner.classList.add('hidden');
+                showNotification('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.', 'success');
+                form.reset();
+            }, 2000);
+        }
+
+        // Show Notification
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.style.opacity = '1';
+                backToTop.style.pointerEvents = 'auto';
+            } else {
+                backToTop.style.opacity = '0';
+                backToTop.style.pointerEvents = 'none';
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Language Toggle (placeholder)
+        function toggleLanguage() {
+            showNotification('تم تفعيل اللغة الإنجليزية - English mode activated', 'success');
+        }
+
+        // Google Maps
+        function openGoogleMaps() {
+            window.open('https://maps.google.com/?q=أمام+المحكمة+الجديدة', '_blank');
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLightbox();
+                const menu = document.getElementById('mobileMenu');
+                menu.classList.remove('active');
+            }
+        });
+
+        // Initialize animations on load
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.animate-fade-in').forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.1}s`;
+            });
+        });
+
+        // Preload critical resources
+        const preloadLink = document.createElement('link');
+        preloadLink.rel = 'preload';
+        preloadLink.href = 'https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;600;700;900&display=swap';
+        preloadLink.as = 'style';
+        document.head.appendChild(preloadLink);
+    </script>
+</body>
+</html>
