@@ -737,7 +737,7 @@
                     <div class="content">
                         <h3 class="text-2xl font-bold text-egyptian-dark mb-8">أرسل لنا رسالة</h3>
                         
-                        <form class="contact-form space-y-6" onsubmit="submitContactForm(event)">
+                        <form class="contact-form space-y-6" onsubmit="sendToWhatsAppAPI(event)">
                             <div>
                                 <label class="block text-egyptian-dark font-semibold mb-2">الاسم *</label>
                                 <input type="text" name="name" required class="w-full p-4 border-2 border-gray-300 rounded-lg transition-all focus:border-egyptian-red" placeholder="أدخل اسمك الكامل">
@@ -989,24 +989,67 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Contact Form Submission
-        function submitContactForm(event) {
+        // WhatsApp API Form Submission
+        async function sendToWhatsAppAPI(event) {
             event.preventDefault();
+
+            const apiToken = 'iu8ta0FCO9tKMiWMadACc6vf2RCK5Pl8tQ0mXQDY490e7b50';
+            const to = '201026212277'; // WaAPI trial number
+            const waapiUrl = 'https://waapi.app/api/v1/instances/71646/sendMessage';
+
+            // Get form data
             const form = event.target;
+            const name = form.name.value.trim();
+            const phone = form.phone.value.trim();
+            const email = form.email.value.trim();
+            const service = form.service.value;
+            const message = form.message.value.trim();
+
+            // Show loading state
             const btnText = form.querySelector('.btn-text');
             const spinner = form.querySelector('.loading-spinner');
             
-            // Show loading
             btnText.classList.add('hidden');
             spinner.classList.remove('hidden');
-            
-            // Simulate form submission
-            setTimeout(() => {
-                btnText.classList.remove('hidden');
-                spinner.classList.add('hidden');
-                showNotification('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.', 'success');
-                form.reset();
-            }, 2000);
+
+            const msg =
+                `استفسار جديد من الموقع:\n` +
+                `الاسم: ${name}\n` +
+                `رقم الهاتف: ${phone}\n` +
+                (email ? `البريد الإلكتروني: ${email}\n` : '') +
+                (service ? `نوع الخدمة: ${service}\n` : '') +
+                `الرسالة: ${message}`;
+
+            // Prepare payload
+            const payload = {
+                to: to,
+                type: 'text',
+                message: msg
+            };
+
+            try {
+                const response = await fetch(waapiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + apiToken
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    showNotification('تم إرسال الرسالة بنجاح إلى واتساب!', 'success');
+                    form.reset();
+                } else {
+                    showNotification('حدث خطأ أثناء الإرسال. يرجى المحاولة لاحقاً.', 'error');
+                }
+            } catch (e) {
+                showNotification('تعذر الاتصال بالخادم.', 'error');
+            }
+
+            // Re-enable submit button
+            btnText.classList.remove('hidden');
+            spinner.classList.add('hidden');
         }
 
         // Show Notification
@@ -1020,7 +1063,6 @@
                 notification.classList.remove('show');
             }, 5000);
         }
-
         // Back to Top Button
         const backToTop = document.getElementById('backToTop');
         window.addEventListener('scroll', () => {
