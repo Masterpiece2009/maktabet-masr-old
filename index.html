@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -218,13 +217,6 @@
             box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
         }
         
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: #b91c1c;
-            box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1);
-        }
-        
         .social-icon {
             transition: all 0.3s ease;
         }
@@ -232,20 +224,6 @@
         .social-icon:hover {
             transform: translateY(-3px) rotate(5deg);
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-        
-        .loading-spinner {
-            border: 3px solid #f3f4f6;
-            border-top: 3px solid #b91c1c;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
         
         .notification {
@@ -302,11 +280,8 @@
                     <a href="#contact" class="nav-link py-2 px-1 hover:text-egyptian-yellow transition-colors">اتصل بنا</a>
                 </nav>
                 
-                <!-- Language Toggle & Mobile Menu -->
+                <!-- Mobile Menu Button -->
                 <div class="flex items-center gap-4">
-                    <button onclick="toggleLanguage()" class="glass-effect px-3 py-1 rounded text-sm hover:bg-egyptian-yellow hover:text-egyptian-dark transition-all">
-                        EN
-                    </button>
                     <button onclick="toggleMobileMenu()" class="md:hidden focus:outline-none">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -477,17 +452,35 @@
                     <div class="pricing-card rounded-xl p-8 text-center">
                         <h4 class="text-xl font-bold text-egyptian-dark mb-4">الطباعة</h4>
                         <div class="text-3xl font-bold text-egyptian-red mb-2">0.25</div>
-                        <p class="text-gray-600">جنيه للصفحة</p>
+                        <div class="text-gray-600 mb-6">جنيه للصفحة</div>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>✓ طباعة أبيض وأسود</li>
+                            <li>✓ جودة عالية</li>
+                            <li>✓ أوراق مختلفة</li>
+                        </ul>
                     </div>
+                    
+                    <div class="pricing-card rounded-xl p-8 text-center border-4 border-egyptian-yellow">
+                        <div class="bg-egyptian-yellow text-egyptian-dark px-4 py-1 rounded-full text-sm font-bold mb-4">الأكثر طلباً</div>
+                        <h4 class="text-xl font-bold text-egyptian-dark mb-4">التصميم</h4>
+                        <div class="text-3xl font-bold text-egyptian-red mb-2">10</div>
+                        <div class="text-gray-600 mb-6">جنيه للتصميم</div>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>✓ تصميم إبداعي</li>
+                            <li>✓ مراجعات مجانية</li>
+                            <li>✓ تسليم سريع</li>
+                        </ul>
+                    </div>
+                    
                     <div class="pricing-card rounded-xl p-8 text-center">
                         <h4 class="text-xl font-bold text-egyptian-dark mb-4">التصوير</h4>
-                        <div class="text-3xl font-bold text-egyptian-red mb-2">0.20</div>
-                        <p class="text-gray-600">جنيه للصفحة</p>
-                    </div>
-                    <div class="pricing-card rounded-xl p-8 text-center">
-                        <h4 class="text-xl font-bold text-egyptian-dark mb-4">التجليد</h4>
-                        <div class="text-3xl font-bold text-egyptian-red mb-2">3.00</div>
-                        <p class="text-gray-600">جنيه للكتاب</p>
+                        <div class="text-3xl font-bold text-egyptian-red mb-2">0.15</div>
+                        <div class="text-gray-600 mb-6">جنيه للصفحة</div>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>✓ مسح ضوئي</li>
+                            <li>✓ دقة عالية</li>
+                            <li>✓ تحويل PDF</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -499,102 +492,114 @@
         <div class="container mx-auto px-4">
             <div class="text-center mb-16 animate-fade-in">
                 <h2 class="text-4xl md:text-5xl font-bold text-egyptian-dark mb-6">معرض أعمالنا</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">شاهد نماذج من أعمالنا المتميزة وإنجازاتنا</p>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">شاهد مجموعة من أفضل أعمالنا ومشاريعنا المنجزة</p>
             </div>
             
-            <!-- Gallery Filter -->
+            <!-- Filter Buttons -->
             <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button onclick="filterGallery('all')" class="filter-btn bg-egyptian-red text-white px-6 py-2 rounded-full font-semibold transition-all hover:bg-egyptian-dark">
+                <button onclick="filterGallery('all')" class="filter-btn bg-egyptian-red text-white px-6 py-3 rounded-lg font-semibold transition-all hover-lift">
                     الكل
                 </button>
-                <button onclick="filterGallery('printing')" class="filter-btn bg-white text-egyptian-dark px-6 py-2 rounded-full font-semibold transition-all hover:bg-egyptian-yellow border border-egyptian-red">
+                <button onclick="filterGallery('printing')" class="filter-btn bg-white text-egyptian-dark px-6 py-3 rounded-lg font-semibold transition-all hover-lift border-2 border-egyptian-red">
                     طباعة
                 </button>
-                <button onclick="filterGallery('design')" class="filter-btn bg-white text-egyptian-dark px-6 py-2 rounded-full font-semibold transition-all hover:bg-egyptian-yellow border border-egyptian-red">
+                <button onclick="filterGallery('design')" class="filter-btn bg-white text-egyptian-dark px-6 py-3 rounded-lg font-semibold transition-all hover-lift border-2 border-egyptian-red">
                     تصميم
                 </button>
-                <button onclick="filterGallery('handmade')" class="filter-btn bg-white text-egyptian-dark px-6 py-2 rounded-full font-semibold transition-all hover:bg-egyptian-yellow border border-egyptian-red">
+                <button onclick="filterGallery('handmade')" class="filter-btn bg-white text-egyptian-dark px-6 py-3 rounded-lg font-semibold transition-all hover-lift border-2 border-egyptian-red">
                     هاند ميد
                 </button>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="galleryGrid">
-                <!-- Gallery Items with Placeholder SVGs -->
-                <div class="gallery-item printing rounded-xl overflow-hidden shadow-lg hover-lift transition-all cursor-pointer" onclick="openLightbox(0)">
-                    <div class="w-full h-64 bg-gradient-to-br from-egyptian-yellow to-yellow-400 flex items-center justify-center">
-                        <div class="text-center text-egyptian-dark">
-                            <div class="text-4xl mb-2">📄</div>
-                            <p class="font-bold">طباعة الملازم</p>
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="gallery-item printing egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer" onclick="openLightbox(0)">
+                    <div class="content">
+                        <div class="h-48 bg-gradient-to-br from-egyptian-yellow to-egyptian-red flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <div class="text-4xl mb-2">📄</div>
+                                <h3 class="text-xl font-bold">طباعة الملازم</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="p-4 bg-white">
-                        <h3 class="font-bold text-egyptian-dark">طباعة عالية الجودة</h3>
-                        <p class="text-gray-600 text-sm">ملازم دراسية</p>
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-egyptian-dark mb-2">طباعة الملازم</h4>
+                            <p class="text-gray-600 text-sm">خدمات طباعة عالية الجودة للطلاب</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="gallery-item design rounded-xl overflow-hidden shadow-lg hover-lift transition-all cursor-pointer" onclick="openLightbox(1)">
-                    <div class="w-full h-64 bg-gradient-to-br from-egyptian-red to-red-600 flex items-center justify-center">
-                        <div class="text-center text-white">
-                            <div class="text-4xl mb-2">🎨</div>
-                            <p class="font-bold">تصميم إبداعي</p>
+                <div class="gallery-item design egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer" onclick="openLightbox(1)">
+                    <div class="content">
+                        <div class="h-48 bg-gradient-to-br from-egyptian-red to-egyptian-dark flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <div class="text-4xl mb-2">🎨</div>
+                                <h3 class="text-xl font-bold">تصميم البروشورات</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="p-4 bg-white">
-                        <h3 class="font-bold text-egyptian-dark">تصميم البروشورات</h3>
-                        <p class="text-gray-600 text-sm">مواد دعائية</p>
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-egyptian-dark mb-2">تصميم البروشورات</h4>
+                            <p class="text-gray-600 text-sm">تصميمات إبداعية للمواد الدعائية</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="gallery-item handmade rounded-xl overflow-hidden shadow-lg hover-lift transition-all cursor-pointer" onclick="openLightbox(2)">
-                    <div class="w-full h-64 bg-gradient-to-br from-egyptian-brown to-amber-700 flex items-center justify-center">
-                        <div class="text-center text-white">
-                            <div class="text-4xl mb-2">🧶</div>
-                            <p class="font-bold">منتجات يدوية</p>
+                <div class="gallery-item handmade egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer" onclick="openLightbox(2)">
+                    <div class="content">
+                        <div class="h-48 bg-gradient-to-br from-egyptian-yellow to-egyptian-red flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <div class="text-4xl mb-2">🧶</div>
+                                <h3 class="text-xl font-bold">منتجات هاند ميد</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="p-4 bg-white">
-                        <h3 class="font-bold text-egyptian-dark">أعمال هاند ميد</h3>
-                        <p class="text-gray-600 text-sm">قطع فنية</p>
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-egyptian-dark mb-2">منتجات هاند ميد</h4>
+                            <p class="text-gray-600 text-sm">أعمال يدوية مميزة وفريدة</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="gallery-item printing rounded-xl overflow-hidden shadow-lg hover-lift transition-all cursor-pointer" onclick="openLightbox(3)">
-                    <div class="w-full h-64 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                        <div class="text-center text-white">
-                            <div class="text-4xl mb-2">💼</div>
-                            <p class="font-bold">كروت العمل</p>
+                <div class="gallery-item printing egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer" onclick="openLightbox(3)">
+                    <div class="content">
+                        <div class="h-48 bg-gradient-to-br from-egyptian-red to-egyptian-dark flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <div class="text-4xl mb-2">💳</div>
+                                <h3 class="text-xl font-bold">كروت العمل</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="p-4 bg-white">
-                        <h3 class="font-bold text-egyptian-dark">كروت شخصية</h3>
-                        <p class="text-gray-600 text-sm">تصميم احترافي</p>
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-egyptian-dark mb-2">كروت العمل</h4>
+                            <p class="text-gray-600 text-sm">تصميم وطباعة كروت شخصية احترافية</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="gallery-item design rounded-xl overflow-hidden shadow-lg hover-lift transition-all cursor-pointer" onclick="openLightbox(4)">
-                    <div class="w-full h-64 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-                        <div class="text-center text-white">
-                            <div class="text-4xl mb-2">📋</div>
-                            <p class="font-bold">مشاريع التخرج</p>
+                <div class="gallery-item design egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer" onclick="openLightbox(4)">
+                    <div class="content">
+                        <div class="h-48 bg-gradient-to-br from-egyptian-yellow to-egyptian-red flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <div class="text-4xl mb-2">🎓</div>
+                                <h3 class="text-xl font-bold">مشاريع التخرج</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="p-4 bg-white">
-                        <h3 class="font-bold text-egyptian-dark">تصميم المشاريع</h3>
-                        <p class="text-gray-600 text-sm">أبحاث علمية</p>
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-egyptian-dark mb-2">مشاريع التخرج</h4>
+                            <p class="text-gray-600 text-sm">تصميم وإخراج مشاريع التخرج والأبحاث</p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="gallery-item printing rounded-xl overflow-hidden shadow-lg hover-lift transition-all cursor-pointer" onclick="openLightbox(5)">
-                    <div class="w-full h-64 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-                        <div class="text-center text-white">
-                            <div class="text-4xl mb-2">📚</div>
-                            <p class="font-bold">تجليد الكتب</p>
+                <div class="gallery-item printing egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer" onclick="openLightbox(5)">
+                    <div class="content">
+                        <div class="h-48 bg-gradient-to-br from-egyptian-red to-egyptian-dark flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <div class="text-4xl mb-2">📚</div>
+                                <h3 class="text-xl font-bold">تجليد الكتب</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="p-4 bg-white">
-                        <h3 class="font-bold text-egyptian-dark">تجليد احترافي</h3>
-                        <p class="text-gray-600 text-sm">كتب ومذكرات</p>
+                        <div class="p-6">
+                            <h4 class="text-lg font-bold text-egyptian-dark mb-2">تجليد الكتب</h4>
+                            <p class="text-gray-600 text-sm">خدمات تجليد احترافية للكتب والمذكرات</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -672,13 +677,13 @@
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">نحن هنا لخدمتكم وننتظر تواصلكم في أي وقت</p>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class="max-w-4xl mx-auto">
                 <!-- Contact Information -->
                 <div class="egyptian-card rounded-xl p-8">
                     <div class="content">
-                        <h3 class="text-2xl font-bold text-egyptian-dark mb-8">معلومات التواصل</h3>
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-8 text-center">معلومات التواصل</h3>
                         
-                        <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div class="flex items-center gap-4">
                                 <div class="feature-icon">📍</div>
                                 <div>
@@ -714,8 +719,8 @@
                         
                         <!-- Payment Methods -->
                         <div class="mt-8">
-                            <h4 class="font-bold text-egyptian-dark mb-4">وسائل الدفع المتاحة</h4>
-                            <div class="grid grid-cols-2 gap-4">
+                            <h4 class="font-bold text-egyptian-dark mb-4 text-center">وسائل الدفع المتاحة</h4>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 <div class="bg-egyptian-yellow p-4 rounded-lg text-center border-2 border-egyptian-red">
                                     <p class="font-bold text-egyptian-dark">فودافون كاش</p>
                                 </div>
@@ -733,66 +738,19 @@
                     </div>
                 </div>
                 
-                <!-- Contact Form -->
-                <div class="egyptian-card rounded-xl p-8">
-                    <div class="content">
-                        <h3 class="text-2xl font-bold text-egyptian-dark mb-8">أرسل لنا رسالة</h3>
-                        
-                        <form class="contact-form space-y-6" onsubmit="submitContactForm(event)">
-                            <div>
-                                <label class="block text-egyptian-dark font-semibold mb-2">الاسم *</label>
-                                <input type="text" name="name" required class="w-full p-4 border-2 border-gray-300 rounded-lg transition-all focus:border-egyptian-red" placeholder="أدخل اسمك الكامل">
+                <!-- Map Section -->
+                <div class="mt-16 egyptian-card rounded-xl p-8">
+                    <div class="content text-center">
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-6">موقعنا على الخريطة</h3>
+                        <div class="w-full h-80 bg-egyptian-yellow rounded-lg flex items-center justify-center border-4 border-egyptian-red">
+                            <div class="text-center text-egyptian-dark">
+                                <div class="text-6xl mb-4">📍</div>
+                                <h4 class="text-2xl font-bold mb-2">مكتبة مصر القديمة</h4>
+                                <p class="text-lg">أمام المحكمة الجديدة</p>
+                                <button onclick="openGoogleMaps()" class="mt-4 bg-egyptian-red text-white px-6 py-2 rounded-lg hover:bg-egyptian-dark transition-all">
+                                    عرض على خرائط جوجل
+                                </button>
                             </div>
-                            
-                            <div>
-                                <label class="block text-egyptian-dark font-semibold mb-2">رقم الهاتف *</label>
-                                <input type="tel" name="phone" required class="w-full p-4 border-2 border-gray-300 rounded-lg transition-all focus:border-egyptian-red" placeholder="أدخل رقم هاتفك">
-                            </div>
-                            
-                            <div>
-                                <label class="block text-egyptian-dark font-semibold mb-2">البريد الإلكتروني</label>
-                                <input type="email" name="email" class="w-full p-4 border-2 border-gray-300 rounded-lg transition-all focus:border-egyptian-red" placeholder="أدخل بريدك الإلكتروني">
-                            </div>
-                            
-                            <div>
-                                <label class="block text-egyptian-dark font-semibold mb-2">نوع الخدمة</label>
-                                <select name="service" class="w-full p-4 border-2 border-gray-300 rounded-lg transition-all focus:border-egyptian-red">
-                                    <option value="">اختر نوع الخدمة</option>
-                                    <option value="printing">طباعة</option>
-                                    <option value="copying">تصوير</option>
-                                    <option value="design">تصميم</option>
-                                    <option value="handmade">هاند ميد</option>
-                                    <option value="payment">خدمات دفع</option>
-                                    <option value="other">أخرى</option>
-                                </select>
-                            </div>
-                            
-                            <div>
-                                <label class="block text-egyptian-dark font-semibold mb-2">الرسالة *</label>
-                                <textarea name="message" required rows="5" class="w-full p-4 border-2 border-gray-300 rounded-lg transition-all focus:border-egyptian-red resize-none" placeholder="اكتب رسالتك هنا..."></textarea>
-                            </div>
-                            
-                            <button type="submit" class="w-full bg-egyptian-red hover:bg-egyptian-dark text-white px-6 py-4 rounded-lg font-bold text-lg transition-all hover-lift shadow-lg">
-                                <span class="btn-text">إرسال الرسالة</span>
-                                <div class="loading-spinner hidden mx-auto"></div>
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Map Section -->
-            <div class="mt-16 egyptian-card rounded-xl p-8">
-                <div class="content text-center">
-                    <h3 class="text-2xl font-bold text-egyptian-dark mb-6">موقعنا على الخريطة</h3>
-                    <div class="w-full h-80 bg-egyptian-yellow rounded-lg flex items-center justify-center border-4 border-egyptian-red">
-                        <div class="text-center text-egyptian-dark">
-                            <div class="text-6xl mb-4">📍</div>
-                            <h4 class="text-2xl font-bold mb-2">مكتبة مصر القديمة</h4>
-                            <p class="text-lg">أمام المحكمة الجديدة</p>
-                            <button onclick="openGoogleMaps()" class="mt-4 bg-egyptian-red text-white px-6 py-2 rounded-lg hover:bg-egyptian-dark transition-all">
-                                عرض على خرائط جوجل
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -990,26 +948,6 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Contact Form Submission
-        function submitContactForm(event) {
-            event.preventDefault();
-            const form = event.target;
-            const btnText = form.querySelector('.btn-text');
-            const spinner = form.querySelector('.loading-spinner');
-            
-            // Show loading
-            btnText.classList.add('hidden');
-            spinner.classList.remove('hidden');
-            
-            // Simulate form submission
-            setTimeout(() => {
-                btnText.classList.remove('hidden');
-                spinner.classList.add('hidden');
-                showNotification('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.', 'success');
-                form.reset();
-            }, 2000);
-        }
-
         // Show Notification
         function showNotification(message, type) {
             const notification = document.getElementById('notification');
@@ -1037,11 +975,6 @@
         backToTop.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-
-        // Language Toggle (placeholder)
-        function toggleLanguage() {
-            showNotification('تم تفعيل اللغة الإنجليزية - English mode activated', 'success');
-        }
 
         // Google Maps
         function openGoogleMaps() {
