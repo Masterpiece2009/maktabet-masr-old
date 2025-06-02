@@ -19,7 +19,7 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;600;700;900&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
     
     <!-- TailwindCSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -32,11 +32,15 @@
                         'egyptian-red': '#b91c1c',
                         'egyptian-dark': '#7f1d1d',
                         'egyptian-brown': '#8b4513',
-                        'papyrus': '#f5f1e8'
+                        'papyrus': '#f5f1e8',
+                        'pyramid-gold': '#d4af37',
+                        'nile-blue': '#4682b4',
+                        'desert-sand': '#f4e4bc'
                     },
                     fontFamily: {
                         'arabic': ['Amiri', 'serif'],
-                        'modern': ['Cairo', 'sans-serif']
+                        'modern': ['Cairo', 'sans-serif'],
+                        'hieroglyph': ['Scheherazade New', 'serif']
                     },
                     animation: {
                         'fade-in': 'fadeIn 0.8s ease-in-out',
@@ -48,7 +52,16 @@
                         'scale-in': 'scaleIn 0.5s ease-out',
                         'slide-left': 'slideLeft 0.8s ease-out',
                         'slide-right': 'slideRight 0.8s ease-out',
-                        'glow': 'glow 2s ease-in-out infinite alternate'
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'hieroglyph-fade': 'hieroglyphFade 4s ease-in-out infinite',
+                        'pyramid-rise': 'pyramidRise 2s ease-out',
+                        'sun-rise': 'sunRise 3s ease-in-out infinite',
+                        'sand-drift': 'sandDrift 8s ease-in-out infinite',
+                        'papyrus-unfold': 'papyrusUnfold 1.5s ease-out',
+                        'ankh-spin': 'ankhSpin 4s ease-in-out infinite',
+                        'scarab-crawl': 'scarabCrawl 6s linear infinite',
+                        'lotus-bloom': 'lotusBloom 3s ease-out',
+                        'pharaoh-emerge': 'pharaohEmerge 2s ease-out'
                     },
                     keyframes: {
                         fadeIn: {
@@ -80,8 +93,46 @@
                             '100%': { opacity: '1', transform: 'translateX(0)' }
                         },
                         glow: {
-                            '0%': { boxShadow: '0 0 20px rgba(251, 191, 36, 0.5)' },
-                            '100%': { boxShadow: '0 0 30px rgba(251, 191, 36, 0.8)' }
+                            '0%': { boxShadow: '0 0 20px rgba(212, 175, 55, 0.5)' },
+                            '100%': { boxShadow: '0 0 40px rgba(212, 175, 55, 0.8)' }
+                        },
+                        hieroglyphFade: {
+                            '0%, 100%': { opacity: '0.1' },
+                            '50%': { opacity: '0.3' }
+                        },
+                        pyramidRise: {
+                            '0%': { opacity: '0', transform: 'translateY(100px) scale(0.5)' },
+                            '100%': { opacity: '1', transform: 'translateY(0) scale(1)' }
+                        },
+                        sunRise: {
+                            '0%': { transform: 'translateY(20px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                            '100%': { transform: 'translateY(20px)' }
+                        },
+                        sandDrift: {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '50%': { transform: 'translateX(20px)' }
+                        },
+                        papyrusUnfold: {
+                            '0%': { transform: 'scaleX(0)', opacity: '0' },
+                            '100%': { transform: 'scaleX(1)', opacity: '1' }
+                        },
+                        ankhSpin: {
+                            '0%, 100%': { transform: 'rotate(0deg)' },
+                            '50%': { transform: 'rotate(180deg)' }
+                        },
+                        scarabCrawl: {
+                            '0%': { transform: 'translateX(-100px) rotate(0deg)' },
+                            '100%': { transform: 'translateX(calc(100vw + 100px)) rotate(360deg)' }
+                        },
+                        lotusBloom: {
+                            '0%': { transform: 'scale(0) rotate(-90deg)', opacity: '0' },
+                            '50%': { transform: 'scale(0.8) rotate(0deg)', opacity: '0.7' },
+                            '100%': { transform: 'scale(1) rotate(0deg)', opacity: '1' }
+                        },
+                        pharaohEmerge: {
+                            '0%': { opacity: '0', transform: 'translateY(50px) rotateX(90deg)' },
+                            '100%': { opacity: '1', transform: 'translateY(0) rotateX(0deg)' }
                         }
                     }
                 }
@@ -94,29 +145,68 @@
             font-family: 'Cairo', 'Amiri', sans-serif;
             background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
             position: relative;
+            overflow-x: hidden;
         }
         
-        body::before {
-            content: '';
+        /* Egyptian Hieroglyphic Background */
+        .hieroglyphic-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background-image: 
-                url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23b91c1c' fill-opacity='0.03'%3E%3Cpath d='M60 60L30 90L30 30zM90 30L60 60L90 90z'/%3E%3Cpath d='M60 0L60 30L90 0zM30 90L60 120L30 120z'/%3E%3Cpath d='M0 60L30 30L0 30zM90 90L120 60L120 90z'/%3E%3C/g%3E%3C/svg%3E"),
-                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23fbbf24' fill-opacity='0.05'%3E%3Ccircle cx='40' cy='40' r='20'/%3E%3Ccircle cx='0' cy='0' r='20'/%3E%3Ccircle cx='80' cy='0' r='20'/%3E%3Ccircle cx='0' cy='80' r='20'/%3E%3Ccircle cx='80' cy='80' r='20'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: 120px 120px, 80px 80px;
-            animation: rotate 30s linear infinite;
+                /* Ankh symbols */
+                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23b91c1c' fill-opacity='0.04'%3E%3Cpath d='M40 10C35 10 30 15 30 20C30 25 35 30 40 30C45 30 50 25 50 20C50 15 45 10 40 10ZM35 30L45 30L45 70L35 70Z'/%3E%3C/g%3E%3C/svg%3E"),
+                /* Eye of Horus */
+                url("data:image/svg+xml,%3Csvg width='100' height='60' viewBox='0 0 100 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37' fill-opacity='0.05'%3E%3Cpath d='M50 20C30 20 20 30 20 30S30 40 50 40S80 30 80 30S70 20 50 20ZM50 25C55 25 60 30 60 30S55 35 50 35S40 30 40 30S45 25 50 25Z'/%3E%3C/g%3E%3C/svg%3E"),
+                /* Scarab beetles */
+                url("data:image/svg+xml,%3Csvg width='60' height='40' viewBox='0 0 60 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23b91c1c' fill-opacity='0.03'%3E%3Cellipse cx='30' cy='20' rx='25' ry='15'/%3E%3Ccircle cx='30' cy='15' r='8'/%3E%3C/g%3E%3C/svg%3E"),
+                /* Pyramid patterns */
+                url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4af37' fill-opacity='0.06'%3E%3Cpath d='M60 20L100 100L20 100Z'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 80px 80px, 100px 60px, 60px 40px, 120px 120px;
+            background-position: 0 0, 40px 30px, 80px 60px, 60px 90px;
+            animation: hieroglyphFade 6s ease-in-out infinite, sandDrift 12s ease-in-out infinite;
             pointer-events: none;
             z-index: -1;
         }
         
+        /* Animated sand particles */
+        .sand-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .sand-particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            animation: sandDrift 8s linear infinite;
+        }
+        
+        /* Floating scarab animation */
+        .floating-scarab {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(139, 69, 19, 0.2);
+            animation: scarabCrawl 15s linear infinite;
+            top: 60%;
+        }
+        
+        /* Egyptian architectural elements */
         .egyptian-pattern {
             background-image: 
-                radial-gradient(circle at 25% 25%, rgba(185, 28, 28, 0.1) 2px, transparent 2px),
-                radial-gradient(circle at 75% 75%, rgba(251, 191, 36, 0.1) 2px, transparent 2px);
-            background-size: 40px 40px;
+                linear-gradient(45deg, rgba(212, 175, 55, 0.1) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(212, 175, 55, 0.1) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(185, 28, 28, 0.05) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(185, 28, 28, 0.05) 75%);
+            background-size: 30px 30px;
+            background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
         }
         
         .egyptian-card {
@@ -147,7 +237,7 @@
             left: 7px;
             right: 7px;
             bottom: 7px;
-            border: 1px solid #fbbf24;
+            border: 1px solid #d4af37;
             pointer-events: none;
             z-index: 1;
         }
@@ -162,20 +252,105 @@
             position: relative;
         }
         
-        .hero-gradient::before {
+        /* New Logo Design */
+        .egyptian-logo {
+            width: 80px;
+            height: 80px;
+            background: #b91c1c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid white;
+            box-shadow: 0 8px 25px rgba(185, 28, 28, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .egyptian-logo::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23b91c1c' fill-opacity='0.08'%3E%3Cpath d='M50 0L70 30L50 60L30 30z'/%3E%3Cpath d='M0 50L30 70L60 50L30 30z'/%3E%3Cpath d='M50 40L70 70L50 100L30 70z'/%3E%3Cpath d='M40 50L70 30L100 50L70 70z'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: 100px 100px;
-            animation: float 4s ease-in-out infinite;
-            pointer-events: none;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+            animation: rotate 6s linear infinite;
         }
-        
+
+        .logo-text {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            font-family: 'Amiri', serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 1;
+        }
+
+        /* Pharaoh crown decoration */
+        .pharaoh-crown {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 15px;
+            background: linear-gradient(45deg, #d4af37, #fbbf24);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        /* Animated pyramid in hero */
+        .hero-pyramid {
+            position: absolute;
+            right: 10%;
+            bottom: 20%;
+            width: 0;
+            height: 0;
+            border-left: 60px solid transparent;
+            border-right: 60px solid transparent;
+            border-bottom: 80px solid rgba(212, 175, 55, 0.3);
+            animation: pyramidRise 3s ease-out, float 4s ease-in-out infinite 3s;
+        }
+
+        /* Sun disc animation */
+        .sun-disc {
+            position: absolute;
+            top: 15%;
+            left: 15%;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #fbbf24, #f59e0b);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.6);
+            animation: sunRise 5s ease-in-out infinite;
+        }
+
+        /* Lotus flower decoration */
+        .lotus-decoration {
+            position: absolute;
+            font-size: 3rem;
+            color: rgba(212, 175, 55, 0.4);
+            animation: lotusBloom 2s ease-out, float 3s ease-in-out infinite 2s;
+        }
+
+        /* Papyrus scroll effect */
+        .papyrus-scroll {
+            background: linear-gradient(90deg, #f4e4bc, #f5f1e8, #f4e4bc);
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            transform-origin: left center;
+            animation: papyrusUnfold 2s ease-out;
+        }
+
+        /* Ankh symbol floating */
+        .floating-ankh {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(185, 28, 28, 0.3);
+            animation: ankhSpin 6s ease-in-out infinite, float 4s ease-in-out infinite;
+        }
+
         .text-shadow {
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
@@ -207,7 +382,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #fbbf24;
+            background: linear-gradient(90deg, #fbbf24, #d4af37);
             transition: width 0.3s ease;
         }
         
@@ -221,7 +396,7 @@
             left: 0;
             width: 0%;
             height: 4px;
-            background: linear-gradient(90deg, #fbbf24, #b91c1c);
+            background: linear-gradient(90deg, #fbbf24, #b91c1c, #d4af37);
             z-index: 9999;
             transition: width 0.1s ease;
         }
@@ -249,7 +424,7 @@
             position: absolute;
             inset: 0;
             padding: 2px;
-            background: linear-gradient(145deg, #fbbf24, #b91c1c);
+            background: linear-gradient(145deg, #fbbf24, #b91c1c, #d4af37);
             border-radius: inherit;
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask-composite: xor;
@@ -257,7 +432,7 @@
         }
         
         .feature-icon {
-            background: linear-gradient(145deg, #fbbf24, #f59e0b);
+            background: linear-gradient(145deg, #fbbf24, #d4af37);
             color: #7f1d1d;
             border-radius: 50%;
             width: 60px;
@@ -266,7 +441,18 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            position: relative;
+        }
+
+        .feature-icon::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: conic-gradient(from 0deg, #d4af37, #fbbf24, #b91c1c, #d4af37);
+            border-radius: 50%;
+            z-index: -1;
+            animation: rotate 4s linear infinite;
         }
         
         .social-icon {
@@ -277,97 +463,65 @@
             transform: translateY(-3px) rotate(5deg);
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
-        
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 16px 24px;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            z-index: 10000;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-        }
-        
-        .notification.show {
-            transform: translateX(0);
-        }
-        
-        .notification.success {
-            background: #10b981;
-        }
-        
-        .notification.error {
-            background: #ef4444;
-        }
 
-        .new-logo {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 4px solid white;
-            box-shadow: 0 8px 25px rgba(185, 28, 28, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .new-logo::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .logo-text {
-            color: white;
-            font-size: 2rem;
-            font-weight: bold;
-            font-family: 'Amiri', serif;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            z-index: 1;
-        }
-
-        .animated-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(-45deg, #fbbf24, #f59e0b, #d97706, #b45309);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
+        /* Egyptian themed animations */
         .stagger-animation {
             animation-delay: var(--delay);
         }
 
-        .parallax-element {
-            transform: translateZ(0);
-            will-change: transform;
+        /* Hieroglyphic text effect */
+        .hieroglyphic-text {
+            font-family: 'Scheherazade New', serif;
+            position: relative;
+        }
+
+        .hieroglyphic-text::before {
+            content: attr(data-hieroglyph);
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: rgba(212, 175, 55, 0.6);
+            animation: hieroglyphFade 3s ease-in-out infinite;
+        }
+
+        /* Sand storm effect */
+        @keyframes sandStorm {
+            0%, 100% { transform: translateX(-100px) rotate(0deg); opacity: 0; }
+            50% { transform: translateX(calc(100vw + 100px)) rotate(180deg); opacity: 0.3; }
+        }
+
+        .sand-storm {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #d4af37;
+            border-radius: 50%;
+            animation: sandStorm 12s linear infinite;
         }
     </style>
 </head>
 <body class="font-modern text-egyptian-dark">
+    <!-- Hieroglyphic Background -->
+    <div class="hieroglyphic-bg"></div>
+    
+    <!-- Sand Particles -->
+    <div class="sand-particles">
+        <div class="sand-particle" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="sand-particle" style="left: 20%; animation-delay: 1s;"></div>
+        <div class="sand-particle" style="left: 30%; animation-delay: 2s;"></div>
+        <div class="sand-particle" style="left: 40%; animation-delay: 3s;"></div>
+        <div class="sand-particle" style="left: 50%; animation-delay: 4s;"></div>
+        <div class="sand-particle" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="sand-particle" style="left: 70%; animation-delay: 6s;"></div>
+        <div class="sand-particle" style="left: 80%; animation-delay: 7s;"></div>
+        <div class="sand-particle" style="left: 90%; animation-delay: 8s;"></div>
+    </div>
+
+    <!-- Floating Scarab -->
+    <div class="floating-scarab">🪲</div>
+    
     <!-- Scroll Progress Indicator -->
     <div class="scroll-indicator" id="scrollIndicator"></div>
     
@@ -375,13 +529,14 @@
     <header class="bg-egyptian-dark text-white sticky top-0 z-50 shadow-2xl">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
-                <!-- New Logo -->
+                <!-- Egyptian Logo -->
                 <div class="flex items-center gap-4">
-                    <div class="new-logo animate-glow">
+                    <div class="egyptian-logo animate-glow relative">
+                        <div class="pharaoh-crown"></div>
                         <span class="logo-text">مك</span>
                     </div>
                     <div class="animate-slide-left">
-                        <h1 class="text-xl font-bold font-arabic">مكتبة مصر القديمة</h1>
+                        <h1 class="text-xl font-bold font-arabic hieroglyphic-text" data-hieroglyph="𓃭𓎡">مكتبة مصر القديمة</h1>
                         <p class="text-xs text-egyptian-yellow">بأسعارها القديمة</p>
                     </div>
                 </div>
@@ -423,48 +578,71 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div class="animated-bg"></div>
-        <div class="absolute inset-0 bg-black bg-opacity-10"></div>
-        <div class="egyptian-pattern absolute inset-0"></div>
+        <!-- Egyptian Pattern Overlay -->
+        <div class="egyptian-pattern absolute inset-0 opacity-20"></div>
+        
+        <!-- Animated Egyptian Elements -->
+        <div class="sun-disc"></div>
+        <div class="hero-pyramid"></div>
+        <div class="lotus-decoration" style="top: 20%; right: 20%; animation-delay: 1s;">🪷</div>
+        <div class="lotus-decoration" style="bottom: 30%; left: 25%; animation-delay: 2s;">🪷</div>
+        <div class="floating-ankh" style="top: 25%; left: 10%; animation-delay: 0.5s;">☥</div>
+        <div class="floating-ankh" style="bottom: 25%; right: 15%; animation-delay: 1.5s;">☥</div>
+        
+        <!-- Sand Storm Effects -->
+        <div class="sand-storm" style="top: 30%; animation-delay: 0s;"></div>
+        <div class="sand-storm" style="top: 50%; animation-delay: 3s;"></div>
+        <div class="sand-storm" style="top: 70%; animation-delay: 6s;"></div>
+        
         <div class="container mx-auto px-4 text-center relative z-10">
             <div class="animate-fade-in">
-                <!-- Logo Animation -->
-                <div class="mb-8 animate-bounce-slow">
-                    <div class="new-logo mx-auto mb-6" style="width: 120px; height: 120px;">
-                        <span class="logo-text" style="font-size: 3rem;">مك</span>
+                <!-- Enhanced Logo Animation -->
+                <div class="mb-8 animate-pharaoh-emerge">
+                    <div class="egyptian-logo mx-auto mb-6 relative" style="width: 140px; height: 140px;">
+                        <div class="pharaoh-crown"></div>
+                        <span class="logo-text" style="font-size: 3.5rem;">مك</span>
+                        <!-- Decorative elements around logo -->
+                        <div class="absolute -top-4 -left-4 text-2xl text-pyramid-gold animate-rotate">⭐</div>
+                        <div class="absolute -top-4 -right-4 text-2xl text-pyramid-gold animate-rotate" style="animation-delay: 1s;">⭐</div>
+                        <div class="absolute -bottom-4 -left-4 text-2xl text-pyramid-gold animate-rotate" style="animation-delay: 2s;">⭐</div>
+                        <div class="absolute -bottom-4 -right-4 text-2xl text-pyramid-gold animate-rotate" style="animation-delay: 3s;">⭐</div>
                     </div>
-                    <div class="mt-4 bg-egyptian-yellow px-6 py-2 rounded-full inline-block border-2 border-egyptian-red animate-pulse-slow">
-                        <span class="text-egyptian-red font-bold">مصر القديمة</span>
+                    <div class="mt-4 bg-egyptian-yellow px-8 py-3 rounded-full inline-block border-3 border-egyptian-red papyrus-scroll animate-pulse-slow">
+                        <span class="text-egyptian-red font-bold text-lg hieroglyphic-text" data-hieroglyph="𓊖𓏏𓊖">مصر القديمة</span>
                     </div>
                 </div>
                 
-                <h1 class="text-5xl md:text-7xl font-bold text-white text-shadow mb-6 font-arabic animate-scale-in">
+                <h1 class="text-6xl md:text-8xl font-bold text-white text-shadow mb-6 font-arabic animate-scale-in hieroglyphic-text" data-hieroglyph="𓊪𓏏𓎛𓀀">
                     مكتبة مصر القديمة
                 </h1>
-                <h2 class="text-2xl md:text-4xl font-semibold text-egyptian-red bg-white px-8 py-3 rounded-xl inline-block mb-8 shadow-xl animate-slide-up">
+                <h2 class="text-3xl md:text-5xl font-semibold text-egyptian-red bg-white px-10 py-4 rounded-xl inline-block mb-8 shadow-xl animate-slide-up papyrus-scroll">
                     بأسعارها القديمة
                 </h2>
-                <p class="text-xl md:text-2xl text-egyptian-dark max-w-4xl mx-auto mb-10 leading-relaxed animate-fade-in" style="animation-delay: 0.5s;">
+                <p class="text-xl md:text-3xl text-egyptian-dark max-w-5xl mx-auto mb-12 leading-relaxed animate-fade-in font-arabic" style="animation-delay: 0.5s;">
                     كل ما تحتاجه من خدمات طباعة، تصوير، تصميم، تغليف، مراجعات دراسية، خدمات إلكترونية وأكثر بأفضل الأسعار وأعلى جودة
                 </p>
                 
-                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center animate-slide-up" style="animation-delay: 0.8s;">
-                    <a href="#services" class="bg-egyptian-red hover:bg-egyptian-dark text-white px-8 py-4 rounded-xl font-bold text-lg transition-all hover-lift shadow-xl">
-                        استكشف خدماتنا
+                <div class="flex flex-col sm:flex-row gap-8 justify-center items-center animate-slide-up" style="animation-delay: 0.8s;">
+                    <a href="#services" class="bg-egyptian-red hover:bg-egyptian-dark text-white px-10 py-5 rounded-xl font-bold text-xl transition-all hover-lift shadow-xl relative overflow-hidden">
+                        <span class="relative z-10">استكشف خدماتنا</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 hover:opacity-20 transition-opacity duration-500 transform -skew-x-12"></div>
                     </a>
-                    <a href="tel:01075939877" class="bg-white text-egyptian-red hover:bg-gray-100 px-8 py-4 rounded-xl font-bold text-lg transition-all hover-lift shadow-xl border-2 border-egyptian-red">
-                        اتصل بنا الآن
+                    <a href="tel:01075939877" class="bg-white text-egyptian-red hover:bg-gray-100 px-10 py-5 rounded-xl font-bold text-xl transition-all hover-lift shadow-xl border-3 border-egyptian-red relative overflow-hidden">
+                        <span class="relative z-10">📞 اتصل بنا الآن</span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-egyptian-yellow to-transparent opacity-0 hover:opacity-20 transition-opacity duration-500 transform -skew-x-12"></div>
                     </a>
                 </div>
             </div>
         </div>
         
-        <!-- Floating Elements -->
-        <div class="absolute top-20 left-10 text-6xl animate-float opacity-20 parallax-element">📚</div>
+        <!-- More Floating Egyptian Elements -->
+        <div class="absolute top-10 left-10 text-6xl animate-float opacity-20 parallax-element">📚</div>
         <div class="absolute bottom-20 right-10 text-5xl animate-bounce-slow opacity-20 parallax-element">🎨</div>
         <div class="absolute top-1/2 left-5 text-4xl animate-pulse-slow opacity-20 parallax-element">📱</div>
         <div class="absolute top-1/3 right-1/4 text-3xl animate-float opacity-15 parallax-element" style="animation-delay: 1s;">⚡</div>
         <div class="absolute bottom-1/3 left-1/4 text-4xl animate-bounce-slow opacity-15 parallax-element" style="animation-delay: 1.5s;">🌟</div>
+        <div class="absolute top-20 right-20 text-4xl animate-sun-rise opacity-25 parallax-element">☀️</div>
+        <div class="absolute bottom-40 left-20 text-3xl animate-lotus-bloom opacity-20 parallax-element" style="animation-delay: 2s;">🏺</div>
     </section>
 
     <!-- Services Section -->
@@ -472,16 +650,19 @@
         <div class="egyptian-pattern absolute inset-0 opacity-30"></div>
         <div class="container mx-auto px-4 relative z-10">
             <div class="text-center mb-16 animate-fade-in">
-                <h2 class="text-4xl md:text-5xl font-bold text-egyptian-dark mb-6">خدماتنا المتميزة</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">نقدم مجموعة شاملة من الخدمات عالية الجودة لتلبية جميع احتياجاتكم</p>
+                <h2 class="text-4xl md:text-6xl font-bold text-egyptian-dark mb-6 hieroglyphic-text font-arabic" data-hieroglyph="𓊹𓌻𓇋">خدماتنا المتميزة</h2>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto">نقدم مجموعة شاملة من الخدمات عالية الجودة لتلبية جميع احتياجاتكم</p>
+                <div class="w-32 h-1 bg-gradient-to-r from-egyptian-yellow via-pyramid-gold to-egyptian-red mx-auto mt-6 rounded-full"></div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service Cards -->
-                <div class="egyptian-card rounded-xl hover-lift transition-all p-8 stagger-animation" style="--delay: 0.1s;">
+                <!-- Service Cards with Egyptian themes -->
+                <div class="egyptian-card rounded-xl hover-lift transition-all p-8 stagger-animation papyrus-scroll" style="--delay: 0.1s;">
                     <div class="content text-center">
-                        <div class="feature-icon mx-auto mb-6 animate-bounce-slow">📝</div>
-                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4">كتابة وطباعة</h3>
+                        <div class="feature-icon mx-auto mb-6 animate-bounce-slow">
+                            <span class="text-2xl">📜</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4 hieroglyphic-text font-arabic" data-hieroglyph="𓏞𓏛">كتابة وطباعة</h3>
                         <p class="text-gray-600 mb-6">خدمات الكتابة والطباعة للملازم والمراجعات والأبحاث بجودة عالية ودقة متناهية</p>
                         <ul class="text-right space-y-2 text-sm text-gray-700">
                             <li class="animate-slide-left" style="--delay: 0.2s;">• طباعة ملونة وأبيض وأسود</li>
@@ -492,10 +673,12 @@
                     </div>
                 </div>
                 
-                <div class="egyptian-card rounded-xl hover-lift transition-all p-8 stagger-animation" style="--delay: 0.2s;">
+                <div class="egyptian-card rounded-xl hover-lift transition-all p-8 stagger-animation papyrus-scroll" style="--delay: 0.2s;">
                     <div class="content text-center">
-                        <div class="feature-icon mx-auto mb-6 animate-bounce-slow">📷</div>
-                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4">تصوير وتغليف</h3>
+                        <div class="feature-icon mx-auto mb-6 animate-bounce-slow">
+                            <span class="text-2xl">📸</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4 hieroglyphic-text font-arabic" data-hieroglyph="𓍲𓏤">تصوير وتغليف</h3>
                         <p class="text-gray-600 mb-6">خدمات التصوير عالية الجودة والتغليف الاحترافي للمستندات والكتب</p>
                         <ul class="text-right space-y-2 text-sm text-gray-700">
                             <li class="animate-slide-left" style="--delay: 0.3s;">• تصوير مستندات وكتب</li>
@@ -506,10 +689,12 @@
                     </div>
                 </div>
                 
-                <div class="egyptian-card rounded-xl hover-lift transition-all p-8 stagger-animation" style="--delay: 0.3s;">
+                <div class="egyptian-card rounded-xl hover-lift transition-all p-8 stagger-animation papyrus-scroll" style="--delay: 0.3s;">
                     <div class="content text-center">
-                        <div class="feature-icon mx-auto mb-6 animate-bounce-slow">🎨</div>
-                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4">تصميم ودعاية</h3>
+                        <div class="feature-icon mx-auto mb-6 animate-bounce-slow">
+                            <span class="text-2xl">🎨</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4 hieroglyphic-text font-arabic" data-hieroglyph="𓊪𓏏𓎛">تصميم ودعاية</h3>
                         <p class="text-gray-600 mb-6">تصميم إبداعي للإعلانات والمواد الدعائية ومشاريع التخرج</p>
                         <ul class="text-right space-y-2 text-sm text-gray-700">
                             <li class="animate-slide-left" style="--delay: 0.4s;">• كروت شخصية وعمل</li>
@@ -520,10 +705,12 @@
                     </div>
                 </div>
                 
-                <div class="egyptian-card rounded-xl hover-lift transition-all p-8 stagger-animation" style="--delay: 0.4s;">
+                <div class="egyptian-card rounded-xl hover-lift transition-all p-8 stagger-animation papyrus-scroll" style="--delay: 0.4s;">
                     <div class="content text-center">
-                        <div class="feature-icon mx-auto mb-6 animate-bounce-slow">💳</div>
-                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4">خدمات الدفع الإلكتروني</h3>
+                        <div class="feature-icon mx-auto mb-6 animate-bounce-slow">
+                            <span class="text-2xl">💳</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4 hieroglyphic-text font-arabic" data-hieroglyph="𓇋𓈖">خدمات الدفع الإلكتروني</h3>
                         <p class="text-gray-600 mb-6">جميع خدمات الدفع الإلكتروني والمحافظ الرقمية</p>
                         <ul class="text-right space-y-2 text-sm text-gray-700">
                             <li class="animate-slide-left" style="--delay: 0.5s;">• فودافون كاش</li>
@@ -534,10 +721,12 @@
                     </div>
                 </div>
                 
-                <div class="egyptian-card rounded-xl hover-lift transition-all p-8 stagger-animation" style="--delay: 0.5s;">
+                <div class="egyptian-card rounded-xl hover-lift transition-all p-8 stagger-animation papyrus-scroll" style="--delay: 0.5s;">
                     <div class="content text-center">
-                        <div class="feature-icon mx-auto mb-6 animate-bounce-slow">🧶</div>
-                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4">منتجات هاند ميد</h3>
+                        <div class="feature-icon mx-auto mb-6 animate-bounce-slow">
+                            <span class="text-2xl">🧶</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4 hieroglyphic-text font-arabic" data-hieroglyph="𓌻𓂋">منتجات هاند ميد</h3>
                         <p class="text-gray-600 mb-6">منتجات يدوية مميزة وهدايا مخصصة بأسعار رائعة</p>
                         <ul class="text-right space-y-2 text-sm text-gray-700">
                             <li class="animate-slide-left" style="--delay: 0.6s;">• أعمال يدوية مميزة</li>
@@ -548,28 +737,33 @@
                     </div>
                 </div>
                 
-                <div class="egyptian-card rounded-xl hover-lift transition-all p-8 stagger-animation" style="--delay: 0.6s;">
+                <div class="egyptian-card rounded-xl hover-lift transition-all p-8 stagger-animation papyrus-scroll" style="--delay: 0.6s;">
                     <div class="content text-center">
-                        <div class="feature-icon mx-auto mb-6 animate-bounce-slow">📱</div>
-                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4">خدمات إضافية</h3>
+                        <div class="feature-icon mx-auto mb-6 animate-bounce-slow">
+                            <span class="text-2xl">📱</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-4 hieroglyphic-text font-arabic" data-hieroglyph="𓊃𓀀">خدمات إضافية</h3>
                         <p class="text-gray-600 mb-6">مجموعة متنوعة من الخدمات الإضافية لراحتكم</p>
                         <ul class="text-right space-y-2 text-sm text-gray-700">
                             <li class="animate-slide-left" style="--delay: 0.7s;">• خدمات حكومية</li>
                             <li class="animate-slide-left" style="--delay: 0.8s;">• دفع فواتير</li>
                             <li class="animate-slide-left" style="--delay: 0.9s;">• استخراج شهادات</li>
-                            <li class="animate-slide-left" style="--delay: 1s;">• خدمات إنترنت</li>
+                            <li class="animate-slide-left" style="--delay: 1.0s;">• خدمات إنترنت</li>
                         </ul>
                     </div>
                 </div>
             </div>
             
-            <!-- Pricing Section -->
+            <!-- Pricing Section with Egyptian Theme -->
             <div class="mt-20">
-                <h3 class="text-3xl font-bold text-center text-egyptian-dark mb-12 animate-fade-in">أسعارنا المميزة</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                    <div class="pricing-card rounded-xl p-8 text-center animate-scale-in" style="--delay: 0.1s;">
+                <h3 class="text-4xl font-bold text-center text-egyptian-dark mb-12 hieroglyphic-text font-arabic" data-hieroglyph="𓊪𓏏𓎛𓊃">أسعارنا المميزة</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="pricing-card rounded-xl p-8 text-center papyrus-scroll">
+                        <div class="egyptian-logo mx-auto mb-4" style="width: 60px; height: 60px;">
+                            <span class="text-2xl text-white">📜</span>
+                        </div>
                         <h4 class="text-xl font-bold text-egyptian-dark mb-4">الطباعة</h4>
-                        <div class="text-3xl font-bold text-egyptian-red mb-2 animate-pulse-slow">0.25</div>
+                        <div class="text-4xl font-bold text-egyptian-red mb-2">0.25</div>
                         <div class="text-gray-600 mb-6">جنيه للصفحة</div>
                         <ul class="text-sm text-gray-700 space-y-2">
                             <li>✓ طباعة أبيض وأسود</li>
@@ -578,10 +772,13 @@
                         </ul>
                     </div>
                     
-                    <div class="pricing-card rounded-xl p-8 text-center border-4 border-egyptian-yellow animate-scale-in" style="--delay: 0.2s;">
-                        <div class="bg-egyptian-yellow text-egyptian-dark px-4 py-1 rounded-full text-sm font-bold mb-4 animate-glow">الأكثر طلباً</div>
+                    <div class="pricing-card rounded-xl p-8 text-center border-4 border-pyramid-gold papyrus-scroll relative">
+                        <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-pyramid-gold text-egyptian-dark px-4 py-1 rounded-full text-sm font-bold">الأكثر طلباً</div>
+                        <div class="egyptian-logo mx-auto mb-4" style="width: 60px; height: 60px;">
+                            <span class="text-2xl text-white">🎨</span>
+                        </div>
                         <h4 class="text-xl font-bold text-egyptian-dark mb-4">التصميم</h4>
-                        <div class="text-3xl font-bold text-egyptian-red mb-2 animate-pulse-slow">10</div>
+                        <div class="text-4xl font-bold text-egyptian-red mb-2">10</div>
                         <div class="text-gray-600 mb-6">جنيه للتصميم</div>
                         <ul class="text-sm text-gray-700 space-y-2">
                             <li>✓ تصميم إبداعي</li>
@@ -590,9 +787,12 @@
                         </ul>
                     </div>
                     
-                    <div class="pricing-card rounded-xl p-8 text-center animate-scale-in" style="--delay: 0.3s;">
+                    <div class="pricing-card rounded-xl p-8 text-center papyrus-scroll">
+                        <div class="egyptian-logo mx-auto mb-4" style="width: 60px; height: 60px;">
+                            <span class="text-2xl text-white">📸</span>
+                        </div>
                         <h4 class="text-xl font-bold text-egyptian-dark mb-4">التصوير</h4>
-                        <div class="text-3xl font-bold text-egyptian-red mb-2 animate-pulse-slow">0.15</div>
+                        <div class="text-4xl font-bold text-egyptian-red mb-2">0.15</div>
                         <div class="text-gray-600 mb-6">جنيه للصفحة</div>
                         <ul class="text-sm text-gray-700 space-y-2">
                             <li>✓ مسح ضوئي</li>
@@ -610,35 +810,37 @@
         <div class="egyptian-pattern absolute inset-0 opacity-20"></div>
         <div class="container mx-auto px-4 relative z-10">
             <div class="text-center mb-16 animate-fade-in">
-                <h2 class="text-4xl md:text-5xl font-bold text-egyptian-dark mb-6">معرض أعمالنا</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">شاهد مجموعة من أفضل أعمالنا ومشاريعنا المنجزة</p>
+                <h2 class="text-4xl md:text-6xl font-bold text-egyptian-dark mb-6 hieroglyphic-text font-arabic" data-hieroglyph="𓊹𓌻𓇋">معرض أعمالنا</h2>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto">شاهد مجموعة من أفضل أعمالنا ومشاريعنا المنجزة</p>
+                <div class="w-32 h-1 bg-gradient-to-r from-egyptian-yellow via-pyramid-gold to-egyptian-red mx-auto mt-6 rounded-full"></div>
             </div>
             
             <!-- Filter Buttons -->
             <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button onclick="filterGallery('all')" class="filter-btn bg-egyptian-red text-white px-6 py-3 rounded-lg font-semibold transition-all hover-lift animate-scale-in" style="--delay: 0.1s;">
+                <button onclick="filterGallery('all')" class="filter-btn bg-egyptian-red text-white px-8 py-3 rounded-lg font-semibold transition-all hover-lift">
                     الكل
                 </button>
-                <button onclick="filterGallery('printing')" class="filter-btn bg-white text-egyptian-dark px-6 py-3 rounded-lg font-semibold transition-all hover-lift border-2 border-egyptian-red animate-scale-in" style="--delay: 0.2s;">
+                <button onclick="filterGallery('printing')" class="filter-btn bg-white text-egyptian-dark px-8 py-3 rounded-lg font-semibold transition-all hover-lift border-2 border-egyptian-red">
                     طباعة
                 </button>
-                <button onclick="filterGallery('design')" class="filter-btn bg-white text-egyptian-dark px-6 py-3 rounded-lg font-semibold transition-all hover-lift border-2 border-egyptian-red animate-scale-in" style="--delay: 0.3s;">
+                <button onclick="filterGallery('design')" class="filter-btn bg-white text-egyptian-dark px-8 py-3 rounded-lg font-semibold transition-all hover-lift border-2 border-egyptian-red">
                     تصميم
                 </button>
-                <button onclick="filterGallery('handmade')" class="filter-btn bg-white text-egyptian-dark px-6 py-3 rounded-lg font-semibold transition-all hover-lift border-2 border-egyptian-red animate-scale-in" style="--delay: 0.4s;">
+                <button onclick="filterGallery('handmade')" class="filter-btn bg-white text-egyptian-dark px-8 py-3 rounded-lg font-semibold transition-all hover-lift border-2 border-egyptian-red">
                     هاند ميد
                 </button>
             </div>
             
             <!-- Gallery Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="gallery-item printing egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer animate-fade-in" onclick="openLightbox(0)" style="--delay: 0.1s;">
+                <div class="gallery-item printing egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer papyrus-scroll" onclick="openLightbox(0)">
                     <div class="content">
-                        <div class="h-48 bg-gradient-to-br from-egyptian-yellow to-egyptian-red flex items-center justify-center">
+                        <div class="h-48 bg-gradient-to-br from-egyptian-yellow to-egyptian-red flex items-center justify-center relative">
                             <div class="text-white text-center">
-                                <div class="text-4xl mb-2 animate-bounce-slow">📄</div>
+                                <div class="text-4xl mb-2">📜</div>
                                 <h3 class="text-xl font-bold">طباعة الملازم</h3>
                             </div>
+                            <div class="absolute top-2 right-2 text-white animate-float">☥</div>
                         </div>
                         <div class="p-6">
                             <h4 class="text-lg font-bold text-egyptian-dark mb-2">طباعة الملازم</h4>
@@ -647,13 +849,14 @@
                     </div>
                 </div>
                 
-                <div class="gallery-item design egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer animate-fade-in" onclick="openLightbox(1)" style="--delay: 0.2s;">
+                <div class="gallery-item design egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer papyrus-scroll" onclick="openLightbox(1)">
                     <div class="content">
-                        <div class="h-48 bg-gradient-to-br from-egyptian-red to-egyptian-dark flex items-center justify-center">
+                        <div class="h-48 bg-gradient-to-br from-egyptian-red to-egyptian-dark flex items-center justify-center relative">
                             <div class="text-white text-center">
-                                <div class="text-4xl mb-2 animate-bounce-slow">🎨</div>
+                                <div class="text-4xl mb-2">🎨</div>
                                 <h3 class="text-xl font-bold">تصميم البروشورات</h3>
                             </div>
+                            <div class="absolute top-2 left-2 text-pyramid-gold animate-rotate">⭐</div>
                         </div>
                         <div class="p-6">
                             <h4 class="text-lg font-bold text-egyptian-dark mb-2">تصميم البروشورات</h4>
@@ -662,13 +865,14 @@
                     </div>
                 </div>
                 
-                <div class="gallery-item handmade egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer animate-fade-in" onclick="openLightbox(2)" style="--delay: 0.3s;">
+                <div class="gallery-item handmade egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer papyrus-scroll" onclick="openLightbox(2)">
                     <div class="content">
-                        <div class="h-48 bg-gradient-to-br from-egyptian-brown to-egyptian-yellow flex items-center justify-center">
+                        <div class="h-48 bg-gradient-to-br from-pyramid-gold to-egyptian-yellow flex items-center justify-center relative">
                             <div class="text-white text-center">
-                                <div class="text-4xl mb-2 animate-bounce-slow">🧶</div>
+                                <div class="text-4xl mb-2">🧶</div>
                                 <h3 class="text-xl font-bold">منتجات هاند ميد</h3>
                             </div>
+                            <div class="absolute bottom-2 right-2 text-white animate-bounce-slow">🪷</div>
                         </div>
                         <div class="p-6">
                             <h4 class="text-lg font-bold text-egyptian-dark mb-2">منتجات هاند ميد</h4>
@@ -677,13 +881,14 @@
                     </div>
                 </div>
                 
-                <div class="gallery-item printing egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer animate-fade-in" onclick="openLightbox(3)" style="--delay: 0.4s;">
+                <div class="gallery-item printing egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer papyrus-scroll" onclick="openLightbox(3)">
                     <div class="content">
-                        <div class="h-48 bg-gradient-to-br from-egyptian-yellow to-egyptian-red flex items-center justify-center">
+                        <div class="h-48 bg-gradient-to-br from-nile-blue to-egyptian-red flex items-center justify-center relative">
                             <div class="text-white text-center">
-                                <div class="text-4xl mb-2 animate-bounce-slow">💳</div>
+                                <div class="text-4xl mb-2">💳</div>
                                 <h3 class="text-xl font-bold">كروت العمل</h3>
                             </div>
+                            <div class="absolute top-2 right-2 text-pyramid-gold animate-pulse-slow">🌟</div>
                         </div>
                         <div class="p-6">
                             <h4 class="text-lg font-bold text-egyptian-dark mb-2">كروت العمل</h4>
@@ -692,13 +897,14 @@
                     </div>
                 </div>
                 
-                <div class="gallery-item design egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer animate-fade-in" onclick="openLightbox(4)" style="--delay: 0.5s;">
+                <div class="gallery-item design egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer papyrus-scroll" onclick="openLightbox(4)">
                     <div class="content">
-                        <div class="h-48 bg-gradient-to-br from-egyptian-red to-egyptian-dark flex items-center justify-center">
+                        <div class="h-48 bg-gradient-to-br from-egyptian-brown to-pyramid-gold flex items-center justify-center relative">
                             <div class="text-white text-center">
-                                <div class="text-4xl mb-2 animate-bounce-slow">📚</div>
+                                <div class="text-4xl mb-2">🎓</div>
                                 <h3 class="text-xl font-bold">مشاريع التخرج</h3>
                             </div>
+                            <div class="absolute bottom-2 left-2 text-white animate-sun-rise">☀️</div>
                         </div>
                         <div class="p-6">
                             <h4 class="text-lg font-bold text-egyptian-dark mb-2">مشاريع التخرج</h4>
@@ -707,13 +913,14 @@
                     </div>
                 </div>
                 
-                <div class="gallery-item printing egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer animate-fade-in" onclick="openLightbox(5)" style="--delay: 0.6s;">
+                <div class="gallery-item printing egyptian-card rounded-xl overflow-hidden hover-lift transition-all cursor-pointer papyrus-scroll" onclick="openLightbox(5)">
                     <div class="content">
-                        <div class="h-48 bg-gradient-to-br from-egyptian-brown to-egyptian-yellow flex items-center justify-center">
+                        <div class="h-48 bg-gradient-to-br from-egyptian-dark to-egyptian-yellow flex items-center justify-center relative">
                             <div class="text-white text-center">
-                                <div class="text-4xl mb-2 animate-bounce-slow">📖</div>
+                                <div class="text-4xl mb-2">📚</div>
                                 <h3 class="text-xl font-bold">تجليد الكتب</h3>
                             </div>
+                            <div class="absolute top-2 left-2 text-pyramid-gold animate-lotus-bloom">🏺</div>
                         </div>
                         <div class="p-6">
                             <h4 class="text-lg font-bold text-egyptian-dark mb-2">تجليد الكتب</h4>
@@ -727,22 +934,25 @@
 
     <!-- About Section -->
     <section id="about" class="py-20 bg-white relative overflow-hidden">
-        <div class="egyptian-pattern absolute inset-0 opacity-30"></div>
+        <div class="egyptian-pattern absolute inset-0 opacity-20"></div>
         <div class="container mx-auto px-4 relative z-10">
             <div class="text-center mb-16 animate-fade-in">
-                <h2 class="text-4xl md:text-5xl font-bold text-egyptian-dark mb-6">من نحن</h2>
-                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                <h2 class="text-4xl md:text-6xl font-bold text-egyptian-dark mb-6 hieroglyphic-text font-arabic" data-hieroglyph="𓊹𓌻">من نحن</h2>
+                <p class="text-xl text-gray-600 max-w-5xl mx-auto leading-relaxed">
                     مكتبة مصر القديمة ليست مجرد مكتبة عادية، بل هي شريكك الأمثل في رحلة التعلم والإبداع. نحن نفخر بتقديم خدمات متميزة وشاملة تلبي جميع احتياجاتكم التعليمية والمهنية بأفضل الأسعار وأعلى مستويات الجودة.
                 </p>
+                <div class="w-32 h-1 bg-gradient-to-r from-egyptian-yellow via-pyramid-gold to-egyptian-red mx-auto mt-6 rounded-full"></div>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <!-- Mission -->
-                <div class="egyptian-card rounded-xl p-8 animate-slide-left">
+                <div class="egyptian-card rounded-xl p-8 papyrus-scroll">
                     <div class="content">
                         <div class="flex items-center mb-6">
-                            <div class="feature-icon ml-4 animate-bounce-slow">🎯</div>
-                            <h3 class="text-2xl font-bold text-egyptian-dark">رسالتنا</h3>
+                            <div class="feature-icon ml-4">
+                                <span class="text-2xl">🎯</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-egyptian-dark hieroglyphic-text font-arabic" data-hieroglyph="𓊪𓏏">رسالتنا</h3>
                         </div>
                         <p class="text-gray-600 text-lg leading-relaxed">
                             نسعى لتقديم أفضل الخدمات التعليمية والطباعة بجودة عالية وأسعار مناسبة، مع الحفاظ على التراث المصري العريق والتطوير المستمر لخدماتنا.
@@ -751,11 +961,13 @@
                 </div>
                 
                 <!-- Vision -->
-                <div class="egyptian-card rounded-xl p-8 animate-slide-right">
+                <div class="egyptian-card rounded-xl p-8 papyrus-scroll">
                     <div class="content">
                         <div class="flex items-center mb-6">
-                            <div class="feature-icon ml-4 animate-bounce-slow">👁️</div>
-                            <h3 class="text-2xl font-bold text-egyptian-dark">رؤيتنا</h3>
+                            <div class="feature-icon ml-4">
+                                <span class="text-2xl">👁️</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-egyptian-dark hieroglyphic-text font-arabic" data-hieroglyph="𓇋𓈖">رؤيتنا</h3>
                         </div>
                         <p class="text-gray-600 text-lg leading-relaxed">
                             أن نكون المكتبة الرائدة في تقديم الخدمات التعليمية والطباعة في المنطقة، ونكون الخيار الأول للطلاب والمهنيين.
@@ -764,24 +976,37 @@
                 </div>
             </div>
             
-            <!-- Statistics -->
-            <div class="mt-20 bg-egyptian-red rounded-2xl p-12 text-white animate-scale-in">
-                <h3 class="text-3xl font-bold text-center mb-12">إنجازاتنا بالأرقام</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                    <div class="animate-fade-in stagger-animation" style="--delay: 0.1s;">
-                        <div class="text-4xl md:text-5xl font-bold mb-2 text-egyptian-yellow animate-pulse-slow">15+</div>
+            <!-- Statistics with Egyptian theme -->
+            <div class="mt-20 bg-egyptian-red rounded-2xl p-12 text-white relative overflow-hidden">
+                <div class="egyptian-pattern absolute inset-0 opacity-10"></div>
+                <h3 class="text-4xl font-bold text-center mb-12 hieroglyphic-text font-arabic relative z-10" data-hieroglyph="𓊪𓏏𓎛">إنجازاتنا بالأرقام</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center relative z-10">
+                    <div class="animate-fade-in">
+                        <div class="egyptian-logo mx-auto mb-4" style="width: 60px; height: 60px; background: rgba(255,255,255,0.2);">
+                            <span class="text-2xl">⏰</span>
+                        </div>
+                        <div class="text-4xl md:text-5xl font-bold mb-2 text-pyramid-gold">15+</div>
                         <p class="text-lg">سنة من الخبرة</p>
                     </div>
-                    <div class="animate-fade-in stagger-animation" style="--delay: 0.2s;">
-                        <div class="text-4xl md:text-5xl font-bold mb-2 text-egyptian-yellow animate-pulse-slow">10,000+</div>
+                    <div class="animate-fade-in" style="animation-delay: 0.2s;">
+                        <div class="egyptian-logo mx-auto mb-4" style="width: 60px; height: 60px; background: rgba(255,255,255,0.2);">
+                            <span class="text-2xl">😊</span>
+                        </div>
+                        <div class="text-4xl md:text-5xl font-bold mb-2 text-pyramid-gold">10,000+</div>
                         <p class="text-lg">عميل راضي</p>
                     </div>
-                    <div class="animate-fade-in stagger-animation" style="--delay: 0.3s;">
-                        <div class="text-4xl md:text-5xl font-bold mb-2 text-egyptian-yellow animate-pulse-slow">50,000+</div>
+                    <div class="animate-fade-in" style="animation-delay: 0.4s;">
+                        <div class="egyptian-logo mx-auto mb-4" style="width: 60px; height: 60px; background: rgba(255,255,255,0.2);">
+                            <span class="text-2xl">✅</span>
+                        </div>
+                        <div class="text-4xl md:text-5xl font-bold mb-2 text-pyramid-gold">50,000+</div>
                         <p class="text-lg">مشروع منجز</p>
                     </div>
-                    <div class="animate-fade-in stagger-animation" style="--delay: 0.4s;">
-                        <div class="text-4xl md:text-5xl font-bold mb-2 text-egyptian-yellow animate-pulse-slow">24/7</div>
+                    <div class="animate-fade-in" style="animation-delay: 0.6s;">
+                        <div class="egyptian-logo mx-auto mb-4" style="width: 60px; height: 60px; background: rgba(255,255,255,0.2);">
+                            <span class="text-2xl">🕐</span>
+                        </div>
+                        <div class="text-4xl md:text-5xl font-bold mb-2 text-pyramid-gold">24/7</div>
                         <p class="text-lg">خدمة متاحة</p>
                     </div>
                 </div>
@@ -789,116 +1014,114 @@
         </div>
     </section>
 
-    <!-- Contact Information Section (No Form) -->
-    <section class="py-20 bg-papyrus relative overflow-hidden">
-        <div class="egyptian-pattern absolute inset-0 opacity-20"></div>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-papyrus relative overflow-hidden">
+        <div class="egyptian-pattern absolute inset-0 opacity-30"></div>
         <div class="container mx-auto px-4 relative z-10">
             <div class="text-center mb-16 animate-fade-in">
-                <h2 class="text-4xl md:text-5xl font-bold text-egyptian-dark mb-6">تواصل معنا</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">نحن هنا لخدمتكم وننتظر تواصلكم في أي وقت</p>
+                <h2 class="text-4xl md:text-6xl font-bold text-egyptian-dark mb-6 hieroglyphic-text font-arabic" data-hieroglyph="𓇋𓈖𓊪">تواصل معنا</h2>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto">نحن هنا لخدمتكم وننتظر تواصلكم في أي وقت</p>
+                <div class="w-32 h-1 bg-gradient-to-r from-egyptian-yellow via-pyramid-gold to-egyptian-red mx-auto mt-6 rounded-full"></div>
             </div>
             
             <div class="max-w-4xl mx-auto">
                 <!-- Contact Information -->
-                <div class="egyptian-card rounded-xl p-8 animate-scale-in">
+                <div class="egyptian-card rounded-xl p-8 papyrus-scroll">
                     <div class="content">
-                        <h3 class="text-2xl font-bold text-egyptian-dark mb-8 text-center">معلومات التواصل</h3>
+                        <h3 class="text-3xl font-bold text-egyptian-dark mb-8 text-center hieroglyphic-text font-arabic" data-hieroglyph="𓇋𓈖𓊪𓏏">معلومات التواصل</h3>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div class="space-y-6">
-                                <div class="flex items-center gap-4 animate-slide-left" style="--delay: 0.1s;">
-                                    <div class="feature-icon animate-bounce-slow">📍</div>
+                                <div class="flex items-center gap-4 p-4 bg-gradient-to-r from-egyptian-yellow to-pyramid-gold rounded-lg">
+                                    <div class="feature-icon">
+                                        <span class="text-2xl">📍</span>
+                                    </div>
                                     <div>
                                         <h4 class="font-bold text-egyptian-dark">العنوان</h4>
-                                        <p class="text-gray-600">أمام المحكمة الجديدة</p>
+                                        <p class="text-egyptian-dark">أمام المحكمة الجديدة</p>
                                     </div>
                                 </div>
                                 
-                                <div class="flex items-center gap-4 animate-slide-left" style="--delay: 0.2s;">
-                                    <div class="feature-icon animate-bounce-slow">📞</div>
-                                    <div>
-                                        <h4 class="font-bold text-egyptian-dark">رقم التواصل</h4>
-                                        <a href="tel:01075939877" class="text-egyptian-red text-xl font-bold hover:text-egyptian-dark transition-colors">01075939877</a>
+                                <div class="flex items-center gap-4 p-4 bg-gradient-to-r from-egyptian-red to-egyptian-dark text-white rounded-lg">
+                                    <div class="feature-icon bg-white">
+                                        <span class="text-2xl">📞</span>
                                     </div>
-                                </div>
-                                
-                                <div class="flex items-center gap-4 animate-slide-left" style="--delay: 0.3s;">
-                                    <div class="feature-icon animate-bounce-slow">💬</div>
                                     <div>
-                                        <h4 class="font-bold text-egyptian-dark">واتساب</h4>
-                                        <a href="https://wa.me/201075939877" class="text-egyptian-red text-xl font-bold hover:text-egyptian-dark transition-colors" target="_blank">01075939877</a>
+                                        <h4 class="font-bold">رقم التواصل</h4>
+                                        <p class="text-xl font-bold">01075939877</p>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="space-y-6">
-                                <div class="flex items-center gap-4 animate-slide-right" style="--delay: 0.1s;">
-                                    <div class="feature-icon animate-bounce-slow">🕒</div>
+                                <div class="flex items-center gap-4 p-4 bg-gradient-to-r from-pyramid-gold to-egyptian-yellow rounded-lg">
+                                    <div class="feature-icon">
+                                        <span class="text-2xl">🕒</span>
+                                    </div>
                                     <div>
                                         <h4 class="font-bold text-egyptian-dark">ساعات العمل</h4>
-                                        <p class="text-gray-600">يومياً من 9 صباحاً إلى 10 مساءً</p>
+                                        <p class="text-egyptian-dark">يومياً من 9 صباحاً إلى 10 مساءً</p>
                                     </div>
                                 </div>
                                 
-                                <div class="flex items-center gap-4 animate-slide-right" style="--delay: 0.2s;">
-                                    <div class="feature-icon animate-bounce-slow">📧</div>
-                                    <div>
-                                        <h4 class="font-bold text-egyptian-dark">البريد الإلكتروني</h4>
-                                        <p class="text-gray-600">info@oldegyptlibrary.com</p>
+                                <div class="flex items-center gap-4 p-4 bg-gradient-to-r from-nile-blue to-egyptian-red text-white rounded-lg">
+                                    <div class="feature-icon bg-white">
+                                        <span class="text-2xl">💬</span>
                                     </div>
-                                </div>
-                                
-                                <div class="flex items-center gap-4 animate-slide-right" style="--delay: 0.3s;">
-                                    <div class="feature-icon animate-bounce-slow">🌐</div>
                                     <div>
-                                        <h4 class="font-bold text-egyptian-dark">الموقع الإلكتروني</h4>
-                                        <p class="text-gray-600">www.oldegyptlibrary.com</p>
+                                        <h4 class="font-bold">واتساب</h4>
+                                        <p class="text-xl font-bold">01075939877</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Payment Methods -->
-                        <div class="mt-8 animate-fade-in" style="--delay: 0.5s;">
-                            <h4 class="font-bold text-egyptian-dark mb-4 text-center">وسائل الدفع المتاحة</h4>
+                        <!-- Payment Methods with Egyptian styling -->
+                        <div class="mt-8">
+                            <h4 class="font-bold text-egyptian-dark mb-6 text-center text-xl hieroglyphic-text" data-hieroglyph="𓇋𓈖">وسائل الدفع المتاحة</h4>
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                <div class="bg-egyptian-yellow p-4 rounded-lg text-center border-2 border-egyptian-red hover-lift transition-all">
+                                <div class="bg-gradient-to-br from-egyptian-yellow to-pyramid-gold p-4 rounded-lg text-center border-2 border-egyptian-red">
+                                    <div class="text-2xl mb-2">💳</div>
                                     <p class="font-bold text-egyptian-dark">فودافون كاش</p>
                                 </div>
-                                <div class="bg-egyptian-yellow p-4 rounded-lg text-center border-2 border-egyptian-red hover-lift transition-all">
+                                <div class="bg-gradient-to-br from-pyramid-gold to-egyptian-yellow p-4 rounded-lg text-center border-2 border-egyptian-red">
+                                    <div class="text-2xl mb-2">🏦</div>
                                     <p class="font-bold text-egyptian-dark">أمان</p>
                                 </div>
-                                <div class="bg-egyptian-yellow p-4 rounded-lg text-center border-2 border-egyptian-red hover-lift transition-all">
+                                <div class="bg-gradient-to-br from-egyptian-yellow to-pyramid-gold p-4 rounded-lg text-center border-2 border-egyptian-red">
+                                    <div class="text-2xl mb-2">💰</div>
                                     <p class="font-bold text-egyptian-dark">كاش</p>
                                 </div>
-                                <div class="bg-egyptian-yellow p-4 rounded-lg text-center border-2 border-egyptian-red hover-lift transition-all">
+                                <div class="bg-gradient-to-br from-pyramid-gold to-egyptian-yellow p-4 rounded-lg text-center border-2 border-egyptian-red">
+                                    <div class="text-2xl mb-2">📱</div>
                                     <p class="font-bold text-egyptian-dark">كاش باي</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Quick Contact Buttons -->
-                        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style="--delay: 0.6s;">
+                        <!-- Contact Action Buttons -->
+                        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
                             <a href="tel:01075939877" class="bg-egyptian-red hover:bg-egyptian-dark text-white px-8 py-4 rounded-xl font-bold text-lg transition-all hover-lift shadow-xl text-center">
-                                📞 اتصل الآن
+                                📞 اتصل بنا الآن
                             </a>
-                            <a href="https://wa.me/201075939877" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all hover-lift shadow-xl text-center">
-                                💬 واتساب
+                            <a href="https://wa.me/201075939877" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all hover-lift shadow-xl text-center">
+                                💬 راسلنا على واتساب
                             </a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Map Section -->
-                <div class="mt-16 egyptian-card rounded-xl p-8 animate-scale-in" style="--delay: 0.7s;">
+                <div class="mt-16 egyptian-card rounded-xl p-8 papyrus-scroll">
                     <div class="content text-center">
-                        <h3 class="text-2xl font-bold text-egyptian-dark mb-6">موقعنا على الخريطة</h3>
-                        <div class="w-full h-80 bg-egyptian-yellow rounded-lg flex items-center justify-center border-4 border-egyptian-red">
-                            <div class="text-center text-egyptian-dark">
+                        <h3 class="text-2xl font-bold text-egyptian-dark mb-6 hieroglyphic-text" data-hieroglyph="𓊪𓏏">موقعنا على الخريطة</h3>
+                        <div class="w-full h-80 bg-gradient-to-br from-egyptian-yellow to-pyramid-gold rounded-lg flex items-center justify-center border-4 border-egyptian-red relative overflow-hidden">
+                            <div class="egyptian-pattern absolute inset-0 opacity-20"></div>
+                            <div class="text-center text-egyptian-dark relative z-10">
                                 <div class="text-6xl mb-4 animate-bounce-slow">📍</div>
                                 <h4 class="text-2xl font-bold mb-2">مكتبة مصر القديمة</h4>
-                                <p class="text-lg">أمام المحكمة الجديدة</p>
-                                <button onclick="openGoogleMaps()" class="mt-4 bg-egyptian-red text-white px-6 py-2 rounded-lg hover:bg-egyptian-dark transition-all hover-lift">
+                                <p class="text-lg mb-4">أمام المحكمة الجديدة</p>
+                                <button onclick="openGoogleMaps()" class="bg-egyptian-red text-white px-6 py-3 rounded-lg hover:bg-egyptian-dark transition-all font-bold">
                                     عرض على خرائط جوجل
                                 </button>
                             </div>
@@ -915,14 +1138,14 @@
         <div class="container mx-auto px-4 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
                 <!-- Company Info -->
-                <div class="animate-slide-left">
+                <div>
                     <div class="flex items-center gap-4 mb-4">
-                        <div class="new-logo" style="width: 64px; height: 64px;">
-                            <span class="logo-text" style="font-size: 1.5rem;">مك</span>
+                        <div class="egyptian-logo">
+                            <span class="logo-text">مك</span>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold font-arabic">مكتبة مصر القديمة</h3>
-                            <p class="text-egyptian-yellow text-sm">بأسعارها القديمة</p>
+                            <h3 class="text-xl font-bold font-arabic hieroglyphic-text" data-hieroglyph="𓃭𓎡">مكتبة مصر القديمة</h3>
+                            <p class="text-pyramid-gold text-sm">بأسعارها القديمة</p>
                         </div>
                     </div>
                     <p class="text-gray-300 leading-relaxed">
@@ -931,41 +1154,41 @@
                 </div>
                 
                 <!-- Quick Links -->
-                <div class="animate-fade-in" style="--delay: 0.2s;">
-                    <h4 class="text-lg font-bold mb-4 text-egyptian-yellow">روابط سريعة</h4>
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-pyramid-gold hieroglyphic-text" data-hieroglyph="𓊹𓌻">روابط سريعة</h4>
                     <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-300 hover:text-egyptian-yellow transition-colors">الرئيسية</a></li>
-                        <li><a href="#services" class="text-gray-300 hover:text-egyptian-yellow transition-colors">الخدمات</a></li>
-                        <li><a href="#gallery" class="text-gray-300 hover:text-egyptian-yellow transition-colors">المعرض</a></li>
-                        <li><a href="#about" class="text-gray-300 hover:text-egyptian-yellow transition-colors">من نحن</a></li>
-                        <li><a href="tel:01075939877" class="text-gray-300 hover:text-egyptian-yellow transition-colors">اتصل بنا</a></li>
+                        <li><a href="#home" class="text-gray-300 hover:text-pyramid-gold transition-colors">الرئيسية</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-pyramid-gold transition-colors">الخدمات</a></li>
+                        <li><a href="#gallery" class="text-gray-300 hover:text-pyramid-gold transition-colors">المعرض</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-pyramid-gold transition-colors">من نحن</a></li>
+                        <li><a href="tel:01075939877" class="text-gray-300 hover:text-pyramid-gold transition-colors">اتصل بنا</a></li>
                     </ul>
                 </div>
                 
                 <!-- Social Media -->
-                <div class="animate-slide-right">
-                    <h4 class="text-lg font-bold mb-4 text-egyptian-yellow">تابعنا على</h4>
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-pyramid-gold hieroglyphic-text" data-hieroglyph="𓇋𓈖">تابعنا على</h4>
                     <div class="flex gap-4">
-                        <a href="#" class="social-icon w-12 h-12 bg-egyptian-yellow rounded-full flex items-center justify-center text-egyptian-red text-xl hover:bg-white animate-bounce-slow">
+                        <a href="#" class="social-icon w-12 h-12 bg-pyramid-gold rounded-full flex items-center justify-center text-egyptian-red text-xl hover:bg-white">
                             📘
                         </a>
-                        <a href="#" class="social-icon w-12 h-12 bg-egyptian-yellow rounded-full flex items-center justify-center text-egyptian-red text-xl hover:bg-white animate-bounce-slow" style="animation-delay: 0.2s;">
+                        <a href="#" class="social-icon w-12 h-12 bg-pyramid-gold rounded-full flex items-center justify-center text-egyptian-red text-xl hover:bg-white">
                             📷
                         </a>
-                        <a href="https://wa.me/201075939877" target="_blank" class="social-icon w-12 h-12 bg-egyptian-yellow rounded-full flex items-center justify-center text-egyptian-red text-xl hover:bg-white animate-bounce-slow" style="animation-delay: 0.4s;">
-                            💬
+                        <a href="#" class="social-icon w-12 h-12 bg-pyramid-gold rounded-full flex items-center justify-center text-egyptian-red text-xl hover:bg-white">
+                            🐦
                         </a>
-                        <a href="tel:01075939877" class="social-icon w-12 h-12 bg-egyptian-yellow rounded-full flex items-center justify-center text-egyptian-red text-xl hover:bg-white animate-bounce-slow" style="animation-delay: 0.6s;">
-                            📞
+                        <a href="https://wa.me/201075939877" class="social-icon w-12 h-12 bg-pyramid-gold rounded-full flex items-center justify-center text-egyptian-red text-xl hover:bg-white">
+                            💬
                         </a>
                     </div>
                 </div>
             </div>
             
-            <div class="border-t border-gray-600 pt-8 text-center animate-fade-in" style="--delay: 0.5s;">
+            <div class="border-t border-gray-600 pt-8 text-center">
                 <p class="text-gray-300">
                     &copy; 2024 مكتبة مصر القديمة. جميع الحقوق محفوظة. 
-                    <span class="text-egyptian-yellow">صنع بحب في مصر</span> ❤️
+                    <span class="text-pyramid-gold">صنع بحب في مصر</span> ❤️
                 </p>
             </div>
         </div>
@@ -974,7 +1197,7 @@
     <!-- Lightbox -->
     <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center p-4">
         <div class="relative max-w-4xl max-h-full">
-            <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white hover:text-egyptian-yellow text-3xl z-10">
+            <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white hover:text-pyramid-gold text-3xl z-10">
                 ✕
             </button>
             <div id="lightboxContent" class="bg-white rounded-lg overflow-hidden">
@@ -982,9 +1205,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Notification -->
-    <div id="notification" class="notification"></div>
 
     <!-- Back to Top Button -->
     <button id="backToTop" class="fixed bottom-8 left-8 w-12 h-12 bg-egyptian-red text-white rounded-full shadow-lg hover:bg-egyptian-dark transition-all opacity-0 pointer-events-none z-40">
@@ -1077,16 +1297,17 @@
             const item = galleryData[index];
             
             content.innerHTML = `
-                <div class="p-8 text-center">
-                    <div class="w-full h-64 bg-gradient-to-br from-egyptian-yellow to-egyptian-red flex items-center justify-center mb-6 rounded-lg">
-                        <div class="text-white">
-                            <div class="text-6xl mb-4">${index % 2 === 0 ? '📄' : '🎨'}</div>
+                <div class="p-8 text-center papyrus-scroll">
+                    <div class="w-full h-64 bg-gradient-to-br from-egyptian-yellow to-egyptian-red flex items-center justify-center mb-6 rounded-lg relative overflow-hidden">
+                        <div class="egyptian-pattern absolute inset-0 opacity-20"></div>
+                        <div class="text-white relative z-10">
+                            <div class="text-6xl mb-4">${index % 2 === 0 ? '📜' : '🎨'}</div>
                             <h3 class="text-2xl font-bold">${item.title}</h3>
                         </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-egyptian-dark mb-4">${item.title}</h3>
+                    <h3 class="text-2xl font-bold text-egyptian-dark mb-4 hieroglyphic-text">${item.title}</h3>
                     <p class="text-gray-600 mb-4">${item.description}</p>
-                    <span class="inline-block bg-egyptian-yellow text-egyptian-dark px-4 py-2 rounded-full font-semibold">${item.type}</span>
+                    <span class="inline-block bg-pyramid-gold text-egyptian-dark px-4 py-2 rounded-full font-semibold">${item.type}</span>
                 </div>
             `;
             
@@ -1137,35 +1358,68 @@
             });
         });
 
-        // Parallax Effect
+        // Egyptian themed particle system
+        function createSandParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'sand-storm';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            document.querySelector('.sand-particles').appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 15000);
+        }
+
+        // Create sand particles periodically
+        setInterval(createSandParticle, 3000);
+
+        // Parallax effect for Egyptian elements
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const parallaxElements = document.querySelectorAll('.parallax-element');
             
-            parallaxElements.forEach((element, index) => {
-                const speed = 0.5 + (index * 0.1);
-                element.style.transform = `translateY(${scrolled * speed}px)`;
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
             });
         });
 
-        // Stagger Animation Initialization
-        document.addEventListener('DOMContentLoaded', () => {
-            const staggerElements = document.querySelectorAll('.stagger-animation');
-            staggerElements.forEach((element, index) => {
-                element.style.animationDelay = `${index * 0.1}s`;
-            });
-        });
-
-        // Enhanced Hover Effects
-        document.querySelectorAll('.hover-lift').forEach(element => {
-            element.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.05)';
-            });
+        // Add random Egyptian symbols animation
+        function addFloatingSymbol() {
+            const symbols = ['☥', '𓂀', '𓅓', '𓆣', '𓇯', '🪷', '⭐', '🏺'];
+            const symbol = symbols[Math.floor(Math.random() * symbols.length)];
             
-            element.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
+            const element = document.createElement('div');
+            element.innerHTML = symbol;
+            element.style.position = 'fixed';
+            element.style.left = Math.random() * window.innerWidth + 'px';
+            element.style.top = window.innerHeight + 'px';
+            element.style.fontSize = Math.random() * 20 + 20 + 'px';
+            element.style.color = 'rgba(212, 175, 55, ' + (Math.random() * 0.3 + 0.1) + ')';
+            element.style.pointerEvents = 'none';
+            element.style.zIndex = '-1';
+            element.style.animation = 'float 8s ease-in-out forwards';
+            
+            document.body.appendChild(element);
+            
+            setTimeout(() => {
+                element.remove();
+            }, 8000);
+        }
+
+        // Add floating symbols periodically
+        setInterval(addFloatingSymbol, 5000);
+
+        // Preload critical resources
+        const preloadLink = document.createElement('link');
+        preloadLink.rel = 'preload';
+        preloadLink.href = 'https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@300;400;600;700;900&family=Scheherazade+New:wght@400;700&display=swap';
+        preloadLink.as = 'style';
+        document.head.appendChild(preloadLink);
     </script>
 </body>
 </html>
